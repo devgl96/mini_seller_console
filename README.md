@@ -9,8 +9,10 @@ A lightweight console to triage Leads and convert them into Opportunities.
   - [x] List all leads
   - [x] Search feature (name / company)
   - [ ] Filter feature (status)
+    - [x] Create a feature
     - [ ] Persist filter option in localStorage
   - [ ] Sort feature (score desc)
+    - [x] Create a feature
     - [ ] Persist sort option in localStorage
   - [ ] Click a row to open a slide-over panel
   - [ ] Add a Convert Lead button in the end of row
