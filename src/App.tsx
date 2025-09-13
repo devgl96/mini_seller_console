@@ -9,22 +9,34 @@ function App() {
   const [leads, setLeads] = useState(LeadList);
 
   function renderLeads() {
-    return leads.map((lead) => {
-      return (
-        <div
-          className="flex gap-1 justify-between items-center p-1 border-b border-gray-600 hover:bg-gray-700"
-          key={lead.id}
-        >
-          <span>{lead.id}</span>
-          <span>{lead.name}</span>
-          <span>{lead.company}</span>
-          <span>{lead.email}</span>
-          <span>{lead.source}</span>
-          <span>{lead.score}</span>
-          <span>{lead.status}</span>
+    return (
+      <div className="h-full w-full overflow-y-scroll">
+        <div className="flex gap-1 justify-between items-center p-1 border-b border-gray-600">
+          <span>ID</span>
+          <span>Name</span>
+          <span>Company</span>
+          <span>Email</span>
+          <span>Source</span>
+          <span>Score</span>
+          <span>Status</span>
         </div>
-      );
-    });
+
+        {leads.map((lead) => (
+          <div
+            className="flex gap-1 justify-between items-center p-1 border-b border-gray-600 hover:bg-gray-700"
+            key={lead.id}
+          >
+            <span>{lead.id}</span>
+            <span>{lead.name}</span>
+            <span>{lead.company}</span>
+            <span>{lead.email}</span>
+            <span>{lead.source}</span>
+            <span>{lead.score}</span>
+            <span>{lead.status}</span>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   function searchLeadsByNameOrCompany(
@@ -57,7 +69,7 @@ function App() {
         }
       />
 
-      <div className="h-full w-full overflow-y-scroll">{renderLeads()}</div>
+      {renderLeads()}
     </div>
   );
 }
