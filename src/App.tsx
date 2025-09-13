@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import LeadList from "./assets/leads_list.json";
 
@@ -21,27 +21,33 @@ interface LeadsProps {
   score: number;
   status: string;
 }
+type TypeSortScoreProps = "asc" | "desc" | null;
 
 function App() {
-  const staticLeads = useRef<LeadsProps[]>(LeadList);
+  const [staticLeads, setStaticLeads] = useState<LeadsProps[]>([]);
   const [leads, setLeads] = useState<LeadsProps[]>([]);
+  const [searchLeads, setSearchLeads] = useState("");
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [uniqueStatusList, setUniqueStatusList] = useState<
     StatusListProps[] | []
   >([]);
-  const [typeSortScore, setTypeSortScore] = useState<"asc" | "desc">("asc");
+  const [typeSortScore, setTypeSortScore] = useState<TypeSortScoreProps>(null);
 
   useEffect(() => {
     loadLeads();
   }, []);
 
   useEffect(() => {
-    renderOptionsStatus();
-  }, [staticLeads]);
+    loadTypeSortScore();
+  }, []);
 
   useEffect(() => {
-    filterLeadsByStatus();
-  }, [uniqueStatusList]);
+    loadOptionsStatus();
+  }, [staticLeads.length]);
+
+  useEffect(() => {
+    updateLeads();
+  }, [uniqueStatusList, typeSortScore]);
 
   function handleOpenModal() {
     setShowStatusModal(true);
@@ -51,17 +57,46 @@ function App() {
     setShowStatusModal(false);
   }
 
-  function loadLeads() {
-    setLeads(staticLeads.current);
+  function getLeads(): Promise<LeadsProps[]> {
+    return new Promise((resolve, reject) => {
+      if (resolve) {
+        return resolve(LeadList);
+      }
+
+      return reject([]);
+    });
   }
 
-  function filterLeadsByStatus() {
-    const filteredLeads = staticLeads.current.filter((lead) => {
-      return uniqueStatusList.some(
+  function loadTypeSortScore() {
+    const typeCurrentSortScore = getDataStorage("msc-typeSortScore");
+    if (typeCurrentSortScore) {
+      setTypeSortScore(typeCurrentSortScore);
+    }
+  }
+
+  async function loadLeads() {
+    const getStaticLeads = await getLeads();
+
+    setStaticLeads(getStaticLeads);
+
+    updateLeads(getStaticLeads);
+  }
+
+  function updateLeads(list: LeadsProps[] = staticLeads) {
+    const filterLeads = filterLeadsByStatus(list);
+    const sortedLeads = sortLeadsByScoreType(filterLeads);
+
+    setLeads(sortedLeads);
+  }
+
+  function filterLeadsByStatus(list: LeadsProps[]) {
+    const filteredLeads = list.filter((lead) =>
+      uniqueStatusList.some(
         (status) => status.status === lead.status && status.checked
-      );
-    });
-    setLeads(filteredLeads);
+      )
+    );
+
+    return filteredLeads;
   }
 
   function handleStatusChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -82,20 +117,31 @@ function App() {
   }
 
   function handleSortScore() {
-    const typeCurrentSortScore = typeSortScore === "asc" ? "desc" : "asc";
+    const typeCurrentSortScore = !typeSortScore
+      ? "desc"
+      : typeSortScore === "desc"
+      ? "asc"
+      : "desc";
 
-    const sortedLeads = staticLeads.current.sort((a, b) => {
-      return typeCurrentSortScore === "asc"
-        ? a.score - b.score
-        : b.score - a.score;
-    });
-
+    saveDataStorage("msc-typeSortScore", typeCurrentSortScore);
     setTypeSortScore(typeCurrentSortScore);
+
+    const sortedLeads = sortLeadsByScoreType(staticLeads);
     setLeads(sortedLeads);
   }
 
+  function sortLeadsByScoreType(list: LeadsProps[]): LeadsProps[] {
+    if (!typeSortScore) return list;
+
+    const sortedLeads = [...list].sort((a, b) =>
+      typeSortScore === "asc" ? a.score - b.score : b.score - a.score
+    );
+
+    return sortedLeads;
+  }
+
   function renderSortScoreIcon() {
-    if (typeSortScore === "asc") {
+    if (typeSortScore === "desc") {
       return (
         <ArrowDownWideNarrow
           size={16}
@@ -115,6 +161,8 @@ function App() {
   }
 
   function renderLeads() {
+    const filteredLeads = searchLeadsByNameOrCompany(searchLeads);
+
     return (
       <div className="relative h-screen w-full">
         <div className="flex gap-1 justify-between items-center p-1 border-b border-gray-600 ">
@@ -124,7 +172,8 @@ function App() {
           <span>Email</span>
           <span>Source</span>
           <span className="flex gap-1 items-center relative">
-            Score {renderSortScoreIcon()}
+            Score {renderSortScoreIcon()}{" "}
+            <b className="uppercase">{typeSortScore}</b>
           </span>
           <span className="flex gap-1 items-center relative">
             Status{" "}
@@ -155,7 +204,7 @@ function App() {
         </div>
 
         <div className="overflow-y-scroll h-screen">
-          {leads.map((lead) => (
+          {filteredLeads.map((lead) => (
             <div
               className="flex gap-1 justify-between items-center p-1 border-b border-gray-600 hover:bg-gray-300"
               key={lead.id}
@@ -174,7 +223,7 @@ function App() {
     );
   }
 
-  function renderOptionsStatus() {
+  function loadOptionsStatus() {
     const statusListDataStorage = getDataStorage("msc-statusList");
 
     if (statusListDataStorage) {
@@ -182,7 +231,7 @@ function App() {
       return;
     }
 
-    const statusList = staticLeads.current.map((lead) => lead.status);
+    const statusList = staticLeads.map((lead) => lead.status);
     const uniqueOptionsStatusList = Array.from(new Set(statusList));
 
     const optionsStatusList = uniqueOptionsStatusList.map((status) => {
@@ -195,21 +244,17 @@ function App() {
     setUniqueStatusList(optionsStatusList);
   }
 
-  function searchLeadsByNameOrCompany(
-    event: React.ChangeEvent<HTMLInputElement>
-  ) {
-    const query = event.target?.value ?? "";
+  function searchLeadsByNameOrCompany(query: string) {
+    const lowerCaseQuery = query.toLowerCase();
+    const lowerCaseData = (leadContent: string) => leadContent.toLowerCase();
 
-    const filteredLeads = staticLeads.current.filter((lead) => {
-      return (
-        lead.name.toLowerCase().includes(query.toLowerCase()) ||
-        lead.company.toLowerCase().includes(query.toLowerCase())
-      );
-    });
+    const filteredLeads = [...leads].filter(
+      (lead) =>
+        lowerCaseData(lead.name).includes(lowerCaseQuery) ||
+        lowerCaseData(lead.company).includes(lowerCaseQuery)
+    );
 
-    setLeads(() => {
-      return filteredLeads;
-    });
+    return filteredLeads;
   }
 
   return (
@@ -221,7 +266,7 @@ function App() {
         type="text"
         placeholder="Search leads (name/company)"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          searchLeadsByNameOrCompany(event)
+          setSearchLeads(event.target.value)
         }
       />
 
