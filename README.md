@@ -7,7 +7,7 @@ A lightweight console to triage Leads and convert them into Opportunities.
 - [x] Create a leads list json file to use in Leads List page
 - [ ] Create a Leads List page
   - [x] List all leads
-  - [ ] Search feature (name / company)
+  - [x] Search feature (name / company)
   - [ ] Filter feature (status)
     - [ ] Persist filter option in localStorage
   - [ ] Sort feature (score desc)
