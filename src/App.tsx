@@ -13,13 +13,14 @@ import {
 import { getDataStorage, saveDataStorage } from "./utils";
 import { StatusBadge } from "./components/StatusBadge";
 import { StatusSelect } from "./components/StatusSelect";
+import { OpportunityPanelModal } from "./components/OpportunityPanelModal";
 
 interface StatusListProps {
   status: string;
   checked: boolean;
 }
 
-interface LeadsProps {
+export interface LeadProps {
   id: number;
   name: string;
   company: string;
@@ -27,12 +28,15 @@ interface LeadsProps {
   source: string;
   score: number;
   status: string;
+  stage?: string;
+  amount?: number;
+  accountName?: string;
 }
 type TypeSortScoreProps = "asc" | "desc" | null;
 
 function App() {
-  const [staticLeads, setStaticLeads] = useState<LeadsProps[]>([]);
-  const [leads, setLeads] = useState<LeadsProps[]>([]);
+  const [staticLeads, setStaticLeads] = useState<LeadProps[]>([]);
+  const [leads, setLeads] = useState<LeadProps[]>([]);
   const [searchLeads, setSearchLeads] = useState("");
   const [uniqueStatusList, setUniqueStatusList] = useState<
     StatusListProps[] | []
@@ -40,7 +44,8 @@ function App() {
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [typeSortScore, setTypeSortScore] = useState<TypeSortScoreProps>(null);
   const [showLeadPanel, setShowLeadPanel] = useState(false);
-  const [selectedLead, setSelectedLead] = useState<LeadsProps | null>(null);
+  const [showOpportunityPanel, setShowOpportunityPanel] = useState(false);
+  const [selectedLead, setSelectedLead] = useState<LeadProps | null>(null);
 
   useEffect(() => {
     loadLeads();
@@ -62,7 +67,7 @@ function App() {
     updateLeads();
   }, [selectedStatus, typeSortScore]);
 
-  function getLeads(): Promise<LeadsProps[]> {
+  function getLeads(): Promise<LeadProps[]> {
     return new Promise((resolve, reject) => {
       if (resolve) {
         return resolve(LeadList);
@@ -87,21 +92,17 @@ function App() {
     updateLeads(getStaticLeads);
   }
 
-  function updateLeads(list: LeadsProps[] = staticLeads) {
+  function updateLeads(list: LeadProps[] = staticLeads) {
     const filterLeads = filterLeadsByStatus(list);
     const sortedLeads = sortLeadsByScoreType(filterLeads);
 
     setLeads(sortedLeads);
   }
 
-  function filterLeadsByStatus(list: LeadsProps[]) {
-    console.log("🧐 >>> filterLeadsByStatus >>> list:", list);
-
+  function filterLeadsByStatus(list: LeadProps[]) {
     if (!selectedStatus) return list;
 
     const filteredLeads = list.filter((lead) => selectedStatus === lead.status);
-
-    console.log("🧐 >>> filterLeadsByStatus >>> filteredLeads:", filteredLeads);
 
     return filteredLeads;
   }
@@ -132,7 +133,7 @@ function App() {
     setLeads(sortedLeads);
   }
 
-  function sortLeadsByScoreType(list: LeadsProps[]): LeadsProps[] {
+  function sortLeadsByScoreType(list: LeadProps[]): LeadProps[] {
     if (!typeSortScore) return list;
 
     const sortedLeads = [...list].sort((a, b) =>
@@ -310,7 +311,7 @@ function App() {
     );
   }
 
-  function handleShowLeadPanel(lead: LeadsProps) {
+  function handleShowLeadPanel(lead: LeadProps) {
     setSelectedLead(lead);
     setShowLeadPanel(true);
   }
@@ -405,7 +406,10 @@ function App() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">
-                    <button className="flex items-center gap-2 rounded-md bg-[var(--primary-color)] px-3 py-1.5 text-xs text-white shadow-sm hover:bg-opacity-90">
+                    <button
+                      className="flex items-center gap-2 rounded-md bg-[var(--primary-color)] px-3 py-1.5 text-xs text-white shadow-sm hover:bg-opacity-90"
+                      onClick={() => handleConvertLead(lead)}
+                    >
                       <span className="material-symbols-outlined text-base">
                         <TrendingUp size={16} />
                       </span>
@@ -419,6 +423,11 @@ function App() {
         </table>
       </div>
     );
+  }
+
+  function handleConvertLead(lead: LeadProps) {
+    setSelectedLead(lead);
+    setShowOpportunityPanel(true);
   }
 
   function loadSelectedStatus() {
@@ -454,6 +463,359 @@ function App() {
     return filteredLeads;
   }
 
+  const opportunities = [
+    {
+      id: 1,
+      name: "Opportunity 1",
+      stage: "Negotiation",
+      amount: 54263,
+      accountName: "Edwards-Simmons",
+    },
+    {
+      id: 2,
+      name: "Opportunity 2",
+      stage: "Closed Won",
+      amount: 64848,
+      accountName: "Craig-Whitney",
+    },
+    {
+      id: 3,
+      name: "Opportunity 3",
+      stage: "Proposal",
+      amount: 58194,
+      accountName: "Leon, Lee and Mccullough",
+    },
+    {
+      id: 4,
+      name: "Opportunity 4",
+      stage: "Negotiation",
+      amount: null,
+      accountName: "Johnson-Evans",
+    },
+    {
+      id: 5,
+      name: "Opportunity 5",
+      stage: "Prospecting",
+      amount: 98284,
+      accountName: "Berg PLC",
+    },
+    {
+      id: 6,
+      name: "Opportunity 6",
+      stage: "Closed Lost",
+      amount: null,
+      accountName: "Stephens Group",
+    },
+    {
+      id: 7,
+      name: "Opportunity 7",
+      stage: "Qualification",
+      amount: 75923,
+      accountName: "Cruz-Martin",
+    },
+    {
+      id: 8,
+      name: "Opportunity 8",
+      stage: "Proposal",
+      amount: null,
+      accountName: "Williams-Buchanan",
+    },
+    {
+      id: 9,
+      name: "Opportunity 9",
+      stage: "Prospecting",
+      amount: 55523,
+      accountName: "Mccoy Group",
+    },
+    {
+      id: 10,
+      name: "Opportunity 10",
+      stage: "Proposal",
+      amount: 45922,
+      accountName: "Brown Ltd",
+    },
+    {
+      id: 11,
+      name: "Opportunity 11",
+      stage: "Closed Won",
+      amount: 9155,
+      accountName: "Robinson-Turner",
+    },
+    {
+      id: 12,
+      name: "Opportunity 12",
+      stage: "Closed Lost",
+      amount: null,
+      accountName: "Brennan PLC",
+    },
+    {
+      id: 13,
+      name: "Opportunity 13",
+      stage: "Qualification",
+      amount: 34281,
+      accountName: "Wilson-Acosta",
+    },
+    {
+      id: 14,
+      name: "Opportunity 14",
+      stage: "Proposal",
+      amount: 52485,
+      accountName: "Fox Inc",
+    },
+    {
+      id: 15,
+      name: "Opportunity 15",
+      stage: "Qualification",
+      amount: null,
+      accountName: "Bell-Rodriguez",
+    },
+    {
+      id: 16,
+      name: "Opportunity 16",
+      stage: "Qualification",
+      amount: null,
+      accountName: "Ellis-Ross",
+    },
+    {
+      id: 17,
+      name: "Opportunity 17",
+      stage: "Proposal",
+      amount: null,
+      accountName: "Chavez, Lawson and Harris",
+    },
+    {
+      id: 18,
+      name: "Opportunity 18",
+      stage: "Closed Lost",
+      amount: null,
+      accountName: "Silva-Washington",
+    },
+    {
+      id: 19,
+      name: "Opportunity 19",
+      stage: "Closed Lost",
+      amount: null,
+      accountName: "Gallegos-Wu",
+    },
+    {
+      id: 20,
+      name: "Opportunity 20",
+      stage: "Negotiation",
+      amount: null,
+      accountName: "Fox Inc",
+    },
+    {
+      id: 21,
+      name: "Opportunity 21",
+      stage: "Closed Lost",
+      amount: null,
+      accountName: "Sanchez, Ruiz and Castro",
+    },
+    {
+      id: 22,
+      name: "Opportunity 22",
+      stage: "Prospecting",
+      amount: null,
+      accountName: "Chavez, Lawson and Harris",
+    },
+    {
+      id: 23,
+      name: "Opportunity 23",
+      stage: "Proposal",
+      amount: null,
+      accountName: "Schroeder PLC",
+    },
+    {
+      id: 24,
+      name: "Opportunity 24",
+      stage: "Closed Lost",
+      amount: 43347,
+      accountName: "Young, Russell and Jenkins",
+    },
+    {
+      id: 25,
+      name: "Opportunity 25",
+      stage: "Negotiation",
+      amount: null,
+      accountName: "Brennan PLC",
+    },
+    {
+      id: 26,
+      name: "Opportunity 26",
+      stage: "Proposal",
+      amount: null,
+      accountName: "House Inc",
+    },
+    {
+      id: 27,
+      name: "Opportunity 27",
+      stage: "Closed Lost",
+      amount: 17944,
+      accountName: "Cordova-Perry",
+    },
+    {
+      id: 28,
+      name: "Opportunity 28",
+      stage: "Closed Won",
+      amount: 89905,
+      accountName: "Estrada Group",
+    },
+    {
+      id: 29,
+      name: "Opportunity 29",
+      stage: "Qualification",
+      amount: null,
+      accountName: "Cruz-Martin",
+    },
+    {
+      id: 30,
+      name: "Opportunity 30",
+      stage: "Closed Won",
+      amount: null,
+      accountName: "Richards-Robles",
+    },
+    {
+      id: 31,
+      name: "Opportunity 31",
+      stage: "Prospecting",
+      amount: 19429,
+      accountName: "James-Thompson",
+    },
+    {
+      id: 32,
+      name: "Opportunity 32",
+      stage: "Negotiation",
+      amount: null,
+      accountName: "Chavez, Lawson and Harris",
+    },
+    {
+      id: 33,
+      name: "Opportunity 33",
+      stage: "Closed Won",
+      amount: 42625,
+      accountName: "Wilson-Salazar",
+    },
+    {
+      id: 34,
+      name: "Opportunity 34",
+      stage: "Negotiation",
+      amount: null,
+      accountName: "Nunez-Stewart",
+    },
+    {
+      id: 35,
+      name: "Opportunity 35",
+      stage: "Proposal",
+      amount: null,
+      accountName: "Duncan PLC",
+    },
+    {
+      id: 36,
+      name: "Opportunity 36",
+      stage: "Prospecting",
+      amount: null,
+      accountName: "Sanchez, Ruiz and Castro",
+    },
+    {
+      id: 37,
+      name: "Opportunity 37",
+      stage: "Qualification",
+      amount: null,
+      accountName: "Rogers PLC",
+    },
+    {
+      id: 38,
+      name: "Opportunity 38",
+      stage: "Negotiation",
+      amount: null,
+      accountName: "Wagner, Keller and Allen",
+    },
+    {
+      id: 39,
+      name: "Opportunity 39",
+      stage: "Closed Won",
+      amount: 83315,
+      accountName: "Young, Russell and Jenkins",
+    },
+    {
+      id: 40,
+      name: "Opportunity 40",
+      stage: "Qualification",
+      amount: 76483,
+      accountName: "Sanchez, Ruiz and Castro",
+    },
+    {
+      id: 41,
+      name: "Opportunity 41",
+      stage: "Closed Won",
+      amount: null,
+      accountName: "Frank Inc",
+    },
+    {
+      id: 42,
+      name: "Opportunity 42",
+      stage: "Prospecting",
+      amount: 93183,
+      accountName: "Williams-Buchanan",
+    },
+    {
+      id: 43,
+      name: "Opportunity 43",
+      stage: "Closed Won",
+      amount: 99391,
+      accountName: "Richards-Robles",
+    },
+    {
+      id: 44,
+      name: "Opportunity 44",
+      stage: "Negotiation",
+      amount: null,
+      accountName: "Richard Group",
+    },
+    {
+      id: 45,
+      name: "Opportunity 45",
+      stage: "Prospecting",
+      amount: 72523,
+      accountName: "Flores, Wallace and Leonard",
+    },
+    {
+      id: 46,
+      name: "Opportunity 46",
+      stage: "Proposal",
+      amount: 85664,
+      accountName: "Moore Group",
+    },
+    {
+      id: 47,
+      name: "Opportunity 47",
+      stage: "Qualification",
+      amount: 81972,
+      accountName: "Robinson LLC",
+    },
+    {
+      id: 48,
+      name: "Opportunity 48",
+      stage: "Negotiation",
+      amount: 13506,
+      accountName: "Wagner, Keller and Allen",
+    },
+    {
+      id: 49,
+      name: "Opportunity 49",
+      stage: "Negotiation",
+      amount: 64483,
+      accountName: "Fox Inc",
+    },
+    {
+      id: 50,
+      name: "Opportunity 50",
+      stage: "Closed Lost",
+      amount: 85079,
+      accountName: "Brandt LLC",
+    },
+  ];
+
   return (
     <main className="flex-1 overflow-y-auto p-8">
       <div className="mx-auto max-w-8xl">
@@ -485,6 +847,15 @@ function App() {
         {renderLeads()}
 
         {renderLeadPanel()}
+
+        {showOpportunityPanel && (
+          <OpportunityPanelModal
+            lead={selectedLead}
+            setShowOpportunityPanel={setShowOpportunityPanel}
+            opportunities={opportunities}
+            setSelectedLead={setSelectedLead}
+          />
+        )}
       </div>
     </main>
   );
