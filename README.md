@@ -11,9 +11,9 @@ A lightweight console to triage Leads and convert them into Opportunities.
   - [x] Filter feature (status)
     - [x] Create a feature
     - [x] Persist filter option in localStorage
-  - [ ] Sort feature (score desc)
+  - [x] Sort feature (score desc)
     - [x] Create a feature
-    - [ ] Persist sort option in localStorage
+    - [x] Persist sort option in localStorage
   - [ ] Click a row to open a slide-over panel
   - [ ] Add a Convert Lead button in the end of row
     - [ ] Create an Opportunity form (fill with previous lead data)
@@ -25,3 +25,7 @@ A lightweight console to triage Leads and convert them into Opportunities.
   - [ ] Create a cancel button
 - [ ] Desktop design first
   - [ ] Mobile design first
+
+### Bonus steps
+
+- [ ] Tooltip on buttons to show what this do
