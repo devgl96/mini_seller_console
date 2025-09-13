@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+import clsx from "clsx";
 function saveDataStorage(key: string, data: any) {
   localStorage.setItem(key, JSON.stringify(data));
 }
@@ -10,4 +12,8 @@ function getDataStorage(key: string) {
   return null;
 }
 
-export { saveDataStorage, getDataStorage };
+function cn(...inputs: string[]) {
+  return twMerge(clsx(inputs));
+}
+
+export { saveDataStorage, getDataStorage, cn };
