@@ -6,11 +6,13 @@ import "./App.css";
 import {
   ArrowDownWideNarrow,
   ArrowUpWideNarrow,
-  Funnel,
+  AtSign,
+  TrendingUp,
   X,
 } from "lucide-react";
-import { Modal } from "./components/Modal";
-import { cn, getDataStorage, saveDataStorage } from "./utils";
+import { getDataStorage, saveDataStorage } from "./utils";
+import { StatusBadge } from "./components/StatusBadge";
+import { StatusSelect } from "./components/StatusSelect";
 
 interface StatusListProps {
   status: string;
@@ -32,10 +34,10 @@ function App() {
   const [staticLeads, setStaticLeads] = useState<LeadsProps[]>([]);
   const [leads, setLeads] = useState<LeadsProps[]>([]);
   const [searchLeads, setSearchLeads] = useState("");
-  const [showStatusModal, setShowStatusModal] = useState(false);
   const [uniqueStatusList, setUniqueStatusList] = useState<
     StatusListProps[] | []
   >([]);
+  const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [typeSortScore, setTypeSortScore] = useState<TypeSortScoreProps>(null);
   const [showLeadPanel, setShowLeadPanel] = useState(false);
   const [selectedLead, setSelectedLead] = useState<LeadsProps | null>(null);
@@ -49,20 +51,16 @@ function App() {
   }, []);
 
   useEffect(() => {
+    loadSelectedStatus();
+  }, []);
+
+  useEffect(() => {
     loadOptionsStatus();
   }, [staticLeads.length]);
 
   useEffect(() => {
     updateLeads();
-  }, [uniqueStatusList, typeSortScore]);
-
-  function handleOpenModal() {
-    setShowStatusModal(true);
-  }
-
-  function handleCloseModal() {
-    setShowStatusModal(false);
-  }
+  }, [selectedStatus, typeSortScore]);
 
   function getLeads(): Promise<LeadsProps[]> {
     return new Promise((resolve, reject) => {
@@ -97,30 +95,27 @@ function App() {
   }
 
   function filterLeadsByStatus(list: LeadsProps[]) {
-    const filteredLeads = list.filter((lead) =>
-      uniqueStatusList.some(
-        (status) => status.status === lead.status && status.checked
-      )
-    );
+    console.log("🧐 >>> filterLeadsByStatus >>> list:", list);
+
+    if (!selectedStatus) return list;
+
+    const filteredLeads = list.filter((lead) => selectedStatus === lead.status);
+
+    console.log("🧐 >>> filterLeadsByStatus >>> filteredLeads:", filteredLeads);
 
     return filteredLeads;
   }
 
-  function handleStatusChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { name, checked } = event.target;
+  function handleStatusChange(
+    statusSelected: React.ChangeEvent<HTMLSelectElement>
+  ) {
+    if (statusSelected.target.value) setSelectedStatus(null);
 
-    const updatedStatusList = uniqueStatusList.map((lead) => {
-      if (lead.status === name) {
-        return { ...lead, checked };
-      }
-      return lead;
-    });
+    const status = statusSelected.target.value;
 
-    if (updatedStatusList.length) {
-      saveDataStorage("msc-statusList", updatedStatusList);
-    }
+    saveDataStorage("msc-selectedStatus", status);
 
-    setUniqueStatusList(updatedStatusList);
+    setSelectedStatus(status);
   }
 
   function handleSortScore() {
@@ -148,176 +143,170 @@ function App() {
   }
 
   function renderSortScoreIcon() {
-    if (typeSortScore === "desc") {
-      return (
-        <ArrowDownWideNarrow
-          size={16}
-          className="cursor-pointer hover:text-gray-400"
-          onClick={handleSortScore}
-        />
-      );
-    }
-
-    return (
-      <ArrowUpWideNarrow
-        size={16}
-        className="cursor-pointer hover:text-gray-400"
-        onClick={handleSortScore}
-      />
+    return typeSortScore === "desc" ? (
+      <ArrowDownWideNarrow size={16} />
+    ) : (
+      <ArrowUpWideNarrow size={16} />
     );
   }
 
   function renderLeadPanel() {
     if (!showLeadPanel || !selectedLead) return <></>;
 
+    const closeSidePanel = () => {
+      setShowLeadPanel(false);
+      setSelectedLead(null);
+    };
+
     return (
-      <div className="fixed inset-0 bg-gray-900 bg-opacity-10 flex justify-end z-40">
+      <>
         <div
-          className="slide-over-panel is-open relative w-full max-w-2xl h-full bg-white shadow-xl flex flex-col"
-          id="slide-over"
+          className={`fixed inset-0 bg-black transition-opacity duration-300 ease-in-out z-40 ${
+            showLeadPanel ? "opacity-50 visible" : "opacity-0 invisible"
+          }`}
+          onClick={closeSidePanel}
+        ></div>
+
+        <div
+          className={`fixed top-0 left-0 h-full w-xl bg-white shadow-xl z-50 transition-all duration-500 ease-out`}
         >
-          <div className="flex items-center justify-between p-6 border-b border-[var(--border-color)]">
-            <div>
-              <h2 className="text-xl font-semibold text-[var(--text-primary)]">
-                Lead Details
-              </h2>
-              <p className="text-sm text-[var(--text-secondary)]">
-                {selectedLead.name} • {selectedLead.company}
-              </p>
-            </div>
-            <button className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition">
-              <span
-                className="material-symbols-outlined"
-                onClick={() => setShowLeadPanel(false)}
-              >
-                <X
-                  size={16}
-                  className="hover:text-gray-400 hover:cursor-pointer"
-                />
-              </span>
-            </button>
-          </div>
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    className="block text-sm font-medium text-[var(--text-secondary)]"
-                    htmlFor="name"
-                  >
-                    Name
-                  </label>
-                  <p
-                    className="mt-1 text-lg font-semibold text-[var(--text-primary)]"
-                    id="name"
-                  >
-                    {selectedLead.name}
-                  </p>
-                </div>
-                <div>
-                  <label
-                    className="block text-sm font-medium text-[var(--text-secondary)]"
-                    htmlFor="company"
-                  >
-                    Company
-                  </label>
-                  <p
-                    className="mt-1 text-lg font-semibold text-[var(--text-primary)]"
-                    id="company"
-                  >
-                    {selectedLead.company}
-                  </p>
-                </div>
-                <div>
-                  <label
-                    className="block text-sm font-medium text-[var(--text-secondary)]"
-                    htmlFor="score"
-                  >
-                    Score
-                  </label>
-                  <p
-                    className="mt-1 text-lg font-semibold text-[var(--text-primary)]"
-                    id="score"
-                  >
-                    {selectedLead.score}
-                  </p>
-                </div>
-                <div>
-                  <label
-                    className="block text-sm font-medium text-[var(--text-secondary)]"
-                    htmlFor="status"
-                  >
-                    Status
-                  </label>
-                  <div className="mt-1 flex items-center gap-2">
-                    <select
-                      className="form-select w-full"
-                      id="status"
-                      name="status"
-                    >
-                      <option selected={undefined} value="New">
-                        New
-                      </option>
-                      <option value="Contacted">Contacted</option>
-                      <option value="Qualified">Qualified</option>
-                      <option value="Unqualified">Unqualified</option>
-                    </select>
-                    <span
-                      className={cn(
-                        "status-badge",
-                        `status-${selectedLead.status.toLowerCase()}`
-                      )}
-                    >
-                      {selectedLead.status}
-                    </span>
-                  </div>
-                </div>
-              </div>
+          <div className="h-full flex flex-col">
+            <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
               <div>
-                <label
-                  className="block text-sm font-medium text-[var(--text-secondary)]"
-                  htmlFor="email"
-                >
-                  Email Address
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <span className="material-symbols-outlined text-gray-400">
-                      mail
-                    </span>
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Lead Details
+                </h2>
+                <p className="text-sm text-gray-500">
+                  {selectedLead.name} • {selectedLead.company}
+                </p>
+              </div>
+              <button
+                onClick={closeSidePanel}
+                className="p-2 hover:bg-gray-100 rounded-full"
+              >
+                <X className="w-5 h-5 text-gray-400" />
+              </button>
+            </div>
+            <div
+              className="slide-over-panel is-open relative w-full max-w-2xl h-full bg-white shadow-xl flex flex-col"
+              id="slide-over"
+            >
+              <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        className="block text-sm font-medium text-[var(--text-secondary)]"
+                        htmlFor="name"
+                      >
+                        Name
+                      </label>
+                      <p
+                        className="mt-1 text-lg font-semibold text-[var(--text-primary)]"
+                        id="name"
+                      >
+                        {selectedLead.name}
+                      </p>
+                    </div>
+                    <div>
+                      <label
+                        className="block text-sm font-medium text-[var(--text-secondary)]"
+                        htmlFor="company"
+                      >
+                        Company
+                      </label>
+                      <p
+                        className="mt-1 text-lg font-semibold text-[var(--text-primary)]"
+                        id="company"
+                      >
+                        {selectedLead.company}
+                      </p>
+                    </div>
+                    <div>
+                      <label
+                        className="block text-sm font-medium text-[var(--text-secondary)]"
+                        htmlFor="score"
+                      >
+                        Score
+                      </label>
+                      <p
+                        className="mt-1 text-lg font-semibold text-[var(--text-primary)]"
+                        id="score"
+                      >
+                        {selectedLead.score}
+                      </p>
+                    </div>
+                    <div>
+                      <label
+                        className="block text-sm font-medium text-[var(--text-secondary)]"
+                        htmlFor="status"
+                      >
+                        Status
+                      </label>
+                      <div className="mt-1 flex items-center gap-2">
+                        <StatusSelect
+                          statusList={uniqueStatusList}
+                          handleStatusChange={(
+                            event: React.ChangeEvent<HTMLSelectElement>
+                          ) => {}}
+                          selectedStatus={selectedStatus}
+                        />
+
+                        <StatusBadge status={selectedLead.status} />
+                      </div>
+                    </div>
                   </div>
-                  <input
-                    className="form-input block w-full pl-10"
-                    id="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    type="email"
-                    value={selectedLead.email}
-                  />
+                  <div>
+                    <label
+                      className="block text-sm font-medium text-[var(--text-secondary)]"
+                      htmlFor="email"
+                    >
+                      Email Address
+                    </label>
+                    <div className="mt-1 relative rounded-md shadow-sm">
+                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <span className="material-symbols-outlined text-gray-400">
+                          <AtSign size={16} />
+                        </span>
+                      </div>
+                      <input
+                        className="form-input block w-full pl-10"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        type="email"
+                        value={selectedLead.email}
+                      />
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div className="p-6 bg-gray-50 border-t border-[var(--border-color)]">
+                <div className="flex justify-end items-center space-x-3">
+                  <span
+                    className="text-sm text-red-600"
+                    id="error-message"
+                  ></span>
+                  <button
+                    className="px-4 py-2 text-sm font-medium text-[var(--text-primary)] bg-white border border-[var(--border-color)] rounded-md shadow-sm hover:bg-gray-50 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-color)] transition"
+                    type="button"
+                    onClick={() => setShowLeadPanel(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-[var(--text-on-primary)] bg-[var(--primary-color)] border border-transparent rounded-md shadow-sm hover:bg-[var(--primary-color-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-color)] transition"
+                    type="submit"
+                  >
+                    Save Changes
+                  </button>
                 </div>
               </div>
-            </form>
-          </div>
-          <div className="p-6 bg-gray-50 border-t border-[var(--border-color)]">
-            <div className="flex justify-end items-center space-x-3">
-              <span className="text-sm text-red-600" id="error-message"></span>
-              <button
-                className="px-4 py-2 text-sm font-medium text-[var(--text-primary)] bg-white border border-[var(--border-color)] rounded-md shadow-sm hover:bg-gray-50 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-color)] transition"
-                type="button"
-                onClick={() => setShowLeadPanel(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="inline-flex justify-center px-4 py-2 text-sm font-medium text-[var(--text-on-primary)] bg-[var(--primary-color)] border border-transparent rounded-md shadow-sm hover:bg-[var(--primary-color-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-color)] transition"
-                type="submit"
-              >
-                Save Changes
-              </button>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -330,74 +319,115 @@ function App() {
     const filteredLeads = searchLeadsByNameOrCompany(searchLeads);
 
     return (
-      <div className="relative h-screen w-full">
-        <div className="flex gap-1 justify-between items-center p-1 border-b border-gray-600 ">
-          <span>ID</span>
-          <span>Name</span>
-          <span>Company</span>
-          <span>Email</span>
-          <span>Source</span>
-          <span className="flex gap-1 items-center relative">
-            Score {renderSortScoreIcon()}{" "}
-            <b className="uppercase">{typeSortScore}</b>
-          </span>
-          <span className="flex gap-1 items-center relative">
-            Status{" "}
-            <Funnel
-              size={16}
-              onClick={handleOpenModal}
-              className="cursor-pointer hover:text-gray-400"
-            />
-            <Modal isOpen={showStatusModal} onClose={() => handleCloseModal()}>
-              {uniqueStatusList.map((lead) => (
-                <div
-                  className="flex gap-2 justify-start items-center min-w-fit max-w-full w-32"
-                  key={lead.status}
-                >
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4 hover:text-gray-600 hover:cursor-pointer"
-                    name={lead.status}
-                    id={lead.status}
-                    checked={lead.checked}
-                    onChange={(event) => handleStatusChange(event)}
-                  />
-                  <span>{lead.status}</span>
-                </div>
-              ))}
-            </Modal>
-          </span>
-        </div>
-
-        <div className="overflow-y-scroll h-screen">
-          {filteredLeads.map((lead) => (
-            <div
-              className="flex gap-1 justify-between items-center p-1 border-b border-gray-600 hover:bg-gray-300 hover:cursor-pointer"
-              key={lead.id}
-              onClick={() => handleShowLeadPanel(lead)}
-            >
-              <span>{lead.id}</span>
-              <span>{lead.name}</span>
-              <span>{lead.company}</span>
-              <span>{lead.email}</span>
-              <span>{lead.source}</span>
-              <span>{lead.score}</span>
-              <span>{lead.status}</span>
-            </div>
-          ))}
-        </div>
+      <div className="flex-1 w-full h-[75vh] overflow-y-scroll rounded-lg border border-[var(--border-color)]">
+        <table className="w-full divide-y divide-[var(--border-color)]">
+          <thead className="bg-gray-50 sticky top-0">
+            <tr>
+              <th
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
+                scope="col"
+              >
+                Id
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
+                scope="col"
+              >
+                Name
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
+                scope="col"
+              >
+                Company
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
+                scope="col"
+              >
+                Email
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
+                scope="col"
+              >
+                Source
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
+                scope="col"
+              >
+                Score
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
+                scope="col"
+              >
+                Status
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
+                scope="col"
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {filteredLeads.map((lead) => (
+              <tr
+                key={lead.id}
+                onClick={() => handleShowLeadPanel(lead)}
+                className="hover:bg-gray-100 hover:cursor-pointer"
+              >
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-900">{lead.id}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-900">{lead.name}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-900">{lead.company}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-900">{lead.email}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-900">{lead.source}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-900">{lead.score}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-900">
+                    <StatusBadge status={lead.status} />
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-900">
+                    <button className="flex items-center gap-2 rounded-md bg-[var(--primary-color)] px-3 py-1.5 text-xs text-white shadow-sm hover:bg-opacity-90">
+                      <span className="material-symbols-outlined text-base">
+                        <TrendingUp size={16} />
+                      </span>
+                      Convert Lead
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
 
+  function loadSelectedStatus() {
+    const statusDataStorage = getDataStorage("msc-selectedStatus");
+
+    setSelectedStatus(statusDataStorage || null);
+  }
+
   function loadOptionsStatus() {
-    const statusListDataStorage = getDataStorage("msc-statusList");
-
-    if (statusListDataStorage) {
-      setUniqueStatusList(statusListDataStorage);
-      return;
-    }
-
     const statusList = staticLeads.map((lead) => lead.status);
     const uniqueOptionsStatusList = Array.from(new Set(statusList));
 
@@ -425,22 +455,38 @@ function App() {
   }
 
   return (
-    <div className="relative w-full p-10 h-screen flex flex-col items-center">
-      <h1 className="font-black text-2xl">Mini Seller Console</h1>
+    <main className="flex-1 overflow-y-auto p-8">
+      <div className="mx-auto max-w-8xl">
+        <h1 className="text-center font-black text-2xl">Mini Seller Console</h1>
 
-      <input
-        className="w-full border border-gray-500 rounded p-2 mt-2"
-        type="text"
-        placeholder="Search leads (name/company)"
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          setSearchLeads(event.target.value)
-        }
-      />
+        <div className="flex flex-1 gap-4 my-4">
+          <input
+            className="flex-1 border border-gray-500 rounded p-2 mt-2"
+            type="text"
+            placeholder="Search leads (name/company)"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setSearchLeads(event.target.value)
+            }
+          />
+          <StatusSelect
+            statusList={uniqueStatusList}
+            handleStatusChange={handleStatusChange}
+            selectedStatus={selectedStatus}
+          />
+          <button
+            className="flex items-center justify-center gap-1 border border-gray-500 rounded p-2 mt-2 hover:cursor-pointer"
+            onClick={handleSortScore}
+          >
+            Score {renderSortScoreIcon()}
+            <b className="uppercase">{typeSortScore}</b>
+          </button>
+        </div>
 
-      {renderLeads()}
+        {renderLeads()}
 
-      {renderLeadPanel()}
-    </div>
+        {renderLeadPanel()}
+      </div>
+    </main>
   );
 }
 
