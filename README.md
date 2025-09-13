@@ -14,15 +14,15 @@ A lightweight console to triage Leads and convert them into Opportunities.
   - [x] Sort feature (score desc)
     - [x] Create a feature
     - [x] Persist sort option in localStorage
-  - [ ] Click a row to open a slide-over panel
+  - [x] Click a row to open a slide-over panel
   - [ ] Add a Convert Lead button in the end of row
     - [ ] Create an Opportunity form (fill with previous lead data)
     - [ ] Show opportunities in a simple table
 - [ ] Create a Lead Detail Panel
   - [ ] Create a form to edit status and email
   - [ ] Validate email format
-  - [ ] Create a save button
-  - [ ] Create a cancel button
+  - [x] Create a save button
+  - [x] Create a cancel button
 - [ ] Desktop design first
   - [ ] Mobile design first
 
