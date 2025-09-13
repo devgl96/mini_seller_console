@@ -5,6 +5,7 @@ import LeadList from "./assets/leads_list.json";
 import "./App.css";
 import { ArrowDownWideNarrow, ArrowUpWideNarrow, Funnel } from "lucide-react";
 import { Modal } from "./components/Modal";
+import { getDataStorage, saveDataStorage } from "./utils";
 
 interface StatusListProps {
   status: string;
@@ -72,6 +73,10 @@ function App() {
       }
       return lead;
     });
+
+    if (updatedStatusList.length) {
+      saveDataStorage("msc-statusList", updatedStatusList);
+    }
 
     setUniqueStatusList(updatedStatusList);
   }
@@ -170,6 +175,13 @@ function App() {
   }
 
   function renderOptionsStatus() {
+    const statusListDataStorage = getDataStorage("msc-statusList");
+
+    if (statusListDataStorage) {
+      setUniqueStatusList(statusListDataStorage);
+      return;
+    }
+
     const statusList = staticLeads.current.map((lead) => lead.status);
     const uniqueOptionsStatusList = Array.from(new Set(statusList));
 
