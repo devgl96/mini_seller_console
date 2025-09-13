@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import LeadList from "./assets/leads_list.json";
 
 import "./App.css";
-import { Funnel } from "lucide-react";
+import { ArrowDownWideNarrow, ArrowUpWideNarrow, Funnel } from "lucide-react";
 import { Modal } from "./components/Modal";
 
 interface StatusListProps {
@@ -28,6 +28,7 @@ function App() {
   const [uniqueStatusList, setUniqueStatusList] = useState<
     StatusListProps[] | []
   >([]);
+  const [typeSortScore, setTypeSortScore] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     loadLeads();
@@ -75,6 +76,39 @@ function App() {
     setUniqueStatusList(updatedStatusList);
   }
 
+  function handleSortScore() {
+    const typeCurrentSortScore = typeSortScore === "asc" ? "desc" : "asc";
+
+    const sortedLeads = staticLeads.current.sort((a, b) => {
+      return typeCurrentSortScore === "asc"
+        ? a.score - b.score
+        : b.score - a.score;
+    });
+
+    setTypeSortScore(typeCurrentSortScore);
+    setLeads(sortedLeads);
+  }
+
+  function renderSortScoreIcon() {
+    if (typeSortScore === "asc") {
+      return (
+        <ArrowDownWideNarrow
+          size={16}
+          className="cursor-pointer hover:text-gray-400"
+          onClick={handleSortScore}
+        />
+      );
+    }
+
+    return (
+      <ArrowUpWideNarrow
+        size={16}
+        className="cursor-pointer hover:text-gray-400"
+        onClick={handleSortScore}
+      />
+    );
+  }
+
   function renderLeads() {
     return (
       <div className="relative h-screen w-full">
@@ -84,7 +118,9 @@ function App() {
           <span>Company</span>
           <span>Email</span>
           <span>Source</span>
-          <span>Score</span>
+          <span className="flex gap-1 items-center relative">
+            Score {renderSortScoreIcon()}
+          </span>
           <span className="flex gap-1 items-center relative">
             Status{" "}
             <Funnel
