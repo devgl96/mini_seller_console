@@ -39,7 +39,7 @@ export function Modal(props: ModalProps) {
         onClick={onClose}
       ></div>
       <div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50 border border-gray-600 rounded-lg p-2"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50 border border-gray-600 rounded-lg p-2 md:w-min sm:w-screen"
         ref={modalRef}
       >
         <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">

@@ -30,7 +30,7 @@ export function LeadPanel(props: LeadPanelProps) {
       ></div>
 
       <div
-        className={`fixed top-0 left-0 h-full w-xl bg-white shadow-xl z-50 transition-all duration-500 ease-out`}
+        className={`fixed top-0 left-0 h-full w-full sm:max-w-lg bg-white shadow-xl z-50 transition-all duration-500 ease-out`}
       >
         <div className="h-full flex flex-col">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">

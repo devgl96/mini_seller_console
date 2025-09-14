@@ -9,7 +9,7 @@ export function StatusSelect(props: StatusSelectProps) {
 
   return (
     <select
-      className="border border-gray-500 rounded p-2 mt-2"
+      className="border border-gray-500 rounded p-2"
       onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
         handleStatusChange(event)
       }

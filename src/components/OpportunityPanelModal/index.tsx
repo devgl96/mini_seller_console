@@ -41,7 +41,7 @@ export function OpportunityPanelModal(props: OpportunityPanelModalProps) {
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
           {opportunity.amount}
         </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
           {opportunity.accountName}
         </td>
       </tr>
@@ -66,9 +66,9 @@ export function OpportunityPanelModal(props: OpportunityPanelModalProps) {
       }}
       title="Create Opportunity"
     >
-      <div className="flex flex-col h-[80vh] w-full">
+      <div className="w-[90vw] max-w-4xl max-h-[80vh] md:overflow-y-hidden overflow-y-auto">
         <form
-          className="flex flex-col w-full"
+          className="flex flex-col w-full p-4"
           onSubmit={handleCreateOpportunity}
         >
           <div className="flex flex-wrap gap-3 items-center justify-center w-full">
@@ -79,7 +79,7 @@ export function OpportunityPanelModal(props: OpportunityPanelModalProps) {
               <input
                 type="text"
                 id="id"
-                className="flex  border border-gray-500 rounded p-2 mt-2"
+                className="flex border border-gray-500 rounded p-2 mt-2"
                 value={opportunityData?.id || ""}
                 onChange={(event) => {
                   setOpportunityData({
@@ -165,18 +165,15 @@ export function OpportunityPanelModal(props: OpportunityPanelModalProps) {
         </form>
 
         {opportunities.length > 0 ? (
-          <>
-            <div className="px-2 py-4 border-b border-gray-200 flex items-center justify-between mb-3">
-              <div>
-                <h2 className="text-lg font-semibold text-gray-900">
-                  Opportunities
-                </h2>
-              </div>
+          <div className="px-4 pb-4">
+            <div className="py-2 border-b flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-gray-900">
+                Opportunities
+              </h2>
             </div>
-
-            <div className="flex flex-1 w-full h-[10vh] overflow-y-scroll rounded-lg border border-[var(--border-color)]">
-              <table className="w-full divide-y divide-gray-200 ">
-                <thead>
+            <div className="mt-4 rounded-lg border md:overflow-x-hidden overflow-x-scroll overflow-y-scroll h-[25vh] flex flex-1 w-full">
+              <table className="w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50 sticky top-0">
                   <tr>
                     <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                       Id
@@ -190,7 +187,7 @@ export function OpportunityPanelModal(props: OpportunityPanelModalProps) {
                     <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                       Amount
                     </th>
-                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                    <th className="hidden md:table-cell px-6 py-3 bg-gray-50 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                       Account Name
                     </th>
                   </tr>
@@ -200,11 +197,13 @@ export function OpportunityPanelModal(props: OpportunityPanelModalProps) {
                 </tbody>
               </table>
             </div>
-          </>
+          </div>
         ) : (
-          <h1 className="flex font-bold bg-gray-200 rounded  items-center justify-center w-full h-full">
-            No Opportunities
-          </h1>
+          <div className="p-4">
+            <h1 className="flex font-bold bg-gray-100 rounded items-center justify-center w-full h-24">
+              No Opportunities
+            </h1>
+          </div>
         )}
       </div>
     </Modal>

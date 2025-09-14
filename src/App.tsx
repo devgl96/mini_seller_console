@@ -216,13 +216,13 @@ function App() {
   }
 
   return (
-    <main className="flex-1 overflow-y-auto p-8">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8">
       <div className="mx-auto max-w-8xl">
         <h1 className="text-center font-black text-2xl">Mini Seller Console</h1>
 
-        <div className="flex flex-1 gap-4 my-4">
+        <div className="flex flex-col md:flex-row flex-1 gap-4 my-4">
           <input
-            className="flex-1 border border-gray-500 rounded p-2 mt-2"
+            className="flex-1 border border-gray-500 rounded p-2"
             type="text"
             placeholder="Search leads (name/company)"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -235,7 +235,7 @@ function App() {
             selectedStatus={selectedStatus}
           />
           <button
-            className="flex items-center justify-center gap-1 border border-gray-500 rounded p-2 mt-2 hover:cursor-pointer"
+            className="flex items-center justify-center gap-1 border border-gray-500 rounded p-2 hover:cursor-pointer"
             onClick={handleSortScore}
           >
             Score {renderSortScoreIcon()}
