@@ -14,25 +14,14 @@ import { getDataStorage, saveDataStorage } from "./utils";
 import { StatusBadge } from "./components/StatusBadge";
 import { StatusSelect } from "./components/StatusSelect";
 import { OpportunityPanelModal } from "./components/OpportunityPanelModal";
-
-interface StatusListProps {
-  status: string;
-  checked: boolean;
-}
-
-export interface LeadProps {
-  id: number;
-  name: string;
-  company: string;
-  email: string;
-  source: string;
-  score: number;
-  status: string;
-  stage?: string;
-  amount?: number;
-  accountName?: string;
-}
-type TypeSortScoreProps = "asc" | "desc" | null;
+import type {
+  OpportunityProps,
+  LeadProps,
+  StatusListProps,
+  TypeSortScoreProps,
+} from "./types";
+import { LeadPanel } from "./components/LeadPanel";
+import { LeadsTable } from "./components/LeadsTable";
 
 function App() {
   const [staticLeads, setStaticLeads] = useState<LeadProps[]>([]);
@@ -46,6 +35,7 @@ function App() {
   const [showLeadPanel, setShowLeadPanel] = useState(false);
   const [showOpportunityPanel, setShowOpportunityPanel] = useState(false);
   const [selectedLead, setSelectedLead] = useState<LeadProps | null>(null);
+  const [opportunities, setOpportunities] = useState<OpportunityProps[]>([]);
 
   useEffect(() => {
     loadLeads();
@@ -77,6 +67,26 @@ function App() {
     });
   }
 
+  function loadSelectedStatus() {
+    const statusDataStorage = getDataStorage("msc-selectedStatus");
+
+    setSelectedStatus(statusDataStorage || null);
+  }
+
+  function loadOptionsStatus() {
+    const statusList = staticLeads.map((lead) => lead.status);
+    const uniqueOptionsStatusList = Array.from(new Set(statusList));
+
+    const optionsStatusList = uniqueOptionsStatusList.map((status) => {
+      return {
+        status,
+        checked: true,
+      };
+    });
+
+    setUniqueStatusList(optionsStatusList);
+  }
+
   function loadTypeSortScore() {
     const typeCurrentSortScore = getDataStorage("msc-typeSortScore");
     if (typeCurrentSortScore) {
@@ -90,21 +100,6 @@ function App() {
     setStaticLeads(getStaticLeads);
 
     updateLeads(getStaticLeads);
-  }
-
-  function updateLeads(list: LeadProps[] = staticLeads) {
-    const filterLeads = filterLeadsByStatus(list);
-    const sortedLeads = sortLeadsByScoreType(filterLeads);
-
-    setLeads(sortedLeads);
-  }
-
-  function filterLeadsByStatus(list: LeadProps[]) {
-    if (!selectedStatus) return list;
-
-    const filteredLeads = list.filter((lead) => selectedStatus === lead.status);
-
-    return filteredLeads;
   }
 
   function handleStatusChange(
@@ -133,6 +128,35 @@ function App() {
     setLeads(sortedLeads);
   }
 
+  function handleShowLeadPanel(lead: LeadProps) {
+    setSelectedLead(lead);
+    setShowLeadPanel(true);
+  }
+
+  function handleConvertLead(
+    event: React.MouseEvent<HTMLButtonElement>,
+    lead: LeadProps
+  ) {
+    event.stopPropagation();
+    setSelectedLead(lead);
+    setShowOpportunityPanel(true);
+  }
+
+  function updateLeads(list: LeadProps[] = staticLeads) {
+    const filterLeads = filterLeadsByStatus(list);
+    const sortedLeads = sortLeadsByScoreType(filterLeads);
+
+    setLeads(sortedLeads);
+  }
+
+  function filterLeadsByStatus(list: LeadProps[]) {
+    if (!selectedStatus) return list;
+
+    const filteredLeads = list.filter((lead) => selectedStatus === lead.status);
+
+    return filteredLeads;
+  }
+
   function sortLeadsByScoreType(list: LeadProps[]): LeadProps[] {
     if (!typeSortScore) return list;
 
@@ -141,313 +165,6 @@ function App() {
     );
 
     return sortedLeads;
-  }
-
-  function renderSortScoreIcon() {
-    return typeSortScore === "desc" ? (
-      <ArrowDownWideNarrow size={16} />
-    ) : (
-      <ArrowUpWideNarrow size={16} />
-    );
-  }
-
-  function renderLeadPanel() {
-    if (!showLeadPanel || !selectedLead) return <></>;
-
-    const closeSidePanel = () => {
-      setShowLeadPanel(false);
-      setSelectedLead(null);
-    };
-
-    return (
-      <>
-        <div
-          className={`fixed inset-0 bg-black transition-opacity duration-300 ease-in-out z-40 ${
-            showLeadPanel ? "opacity-50 visible" : "opacity-0 invisible"
-          }`}
-          onClick={closeSidePanel}
-        ></div>
-
-        <div
-          className={`fixed top-0 left-0 h-full w-xl bg-white shadow-xl z-50 transition-all duration-500 ease-out`}
-        >
-          <div className="h-full flex flex-col">
-            <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-semibold text-gray-900">
-                  Lead Details
-                </h2>
-                <p className="text-sm text-gray-500">
-                  {selectedLead.name} • {selectedLead.company}
-                </p>
-              </div>
-              <button
-                onClick={closeSidePanel}
-                className="p-2 hover:bg-gray-100 rounded-full"
-              >
-                <X className="w-5 h-5 text-gray-400" />
-              </button>
-            </div>
-            <div
-              className="slide-over-panel is-open relative w-full max-w-2xl h-full bg-white shadow-xl flex flex-col"
-              id="slide-over"
-            >
-              <div className="flex-1 overflow-y-auto p-6 space-y-6">
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label
-                        className="block text-sm font-medium text-[var(--text-secondary)]"
-                        htmlFor="name"
-                      >
-                        Name
-                      </label>
-                      <p
-                        className="mt-1 text-lg font-semibold text-[var(--text-primary)]"
-                        id="name"
-                      >
-                        {selectedLead.name}
-                      </p>
-                    </div>
-                    <div>
-                      <label
-                        className="block text-sm font-medium text-[var(--text-secondary)]"
-                        htmlFor="company"
-                      >
-                        Company
-                      </label>
-                      <p
-                        className="mt-1 text-lg font-semibold text-[var(--text-primary)]"
-                        id="company"
-                      >
-                        {selectedLead.company}
-                      </p>
-                    </div>
-                    <div>
-                      <label
-                        className="block text-sm font-medium text-[var(--text-secondary)]"
-                        htmlFor="score"
-                      >
-                        Score
-                      </label>
-                      <p
-                        className="mt-1 text-lg font-semibold text-[var(--text-primary)]"
-                        id="score"
-                      >
-                        {selectedLead.score}
-                      </p>
-                    </div>
-                    <div>
-                      <label
-                        className="block text-sm font-medium text-[var(--text-secondary)]"
-                        htmlFor="status"
-                      >
-                        Status
-                      </label>
-                      <div className="mt-1 flex items-center gap-2">
-                        <StatusSelect
-                          statusList={uniqueStatusList}
-                          handleStatusChange={(
-                            event: React.ChangeEvent<HTMLSelectElement>
-                          ) => {}}
-                          selectedStatus={selectedStatus}
-                        />
-
-                        <StatusBadge status={selectedLead.status} />
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      className="block text-sm font-medium text-[var(--text-secondary)]"
-                      htmlFor="email"
-                    >
-                      Email Address
-                    </label>
-                    <div className="mt-1 relative rounded-md shadow-sm">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <span className="material-symbols-outlined text-gray-400">
-                          <AtSign size={16} />
-                        </span>
-                      </div>
-                      <input
-                        className="form-input block w-full pl-10"
-                        id="email"
-                        name="email"
-                        placeholder="you@example.com"
-                        type="email"
-                        value={selectedLead.email}
-                      />
-                    </div>
-                  </div>
-                </form>
-              </div>
-
-              <div className="p-6 bg-gray-50 border-t border-[var(--border-color)]">
-                <div className="flex justify-end items-center space-x-3">
-                  <span
-                    className="text-sm text-red-600"
-                    id="error-message"
-                  ></span>
-                  <button
-                    className="px-4 py-2 text-sm font-medium text-[var(--text-primary)] bg-white border border-[var(--border-color)] rounded-md shadow-sm hover:bg-gray-50 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-color)] transition"
-                    type="button"
-                    onClick={() => setShowLeadPanel(false)}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-[var(--text-on-primary)] bg-[var(--primary-color)] border border-transparent rounded-md shadow-sm hover:bg-[var(--primary-color-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-color)] transition"
-                    type="submit"
-                  >
-                    Save Changes
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  function handleShowLeadPanel(lead: LeadProps) {
-    setSelectedLead(lead);
-    setShowLeadPanel(true);
-  }
-
-  function renderLeads() {
-    const filteredLeads = searchLeadsByNameOrCompany(searchLeads);
-
-    return (
-      <div className="flex-1 w-full h-[75vh] overflow-y-scroll rounded-lg border border-[var(--border-color)]">
-        <table className="w-full divide-y divide-[var(--border-color)]">
-          <thead className="bg-gray-50 sticky top-0">
-            <tr>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
-                scope="col"
-              >
-                Id
-              </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
-                scope="col"
-              >
-                Name
-              </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
-                scope="col"
-              >
-                Company
-              </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
-                scope="col"
-              >
-                Email
-              </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
-                scope="col"
-              >
-                Source
-              </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
-                scope="col"
-              >
-                Score
-              </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
-                scope="col"
-              >
-                Status
-              </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]"
-                scope="col"
-              >
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {filteredLeads.map((lead) => (
-              <tr
-                key={lead.id}
-                onClick={() => handleShowLeadPanel(lead)}
-                className="hover:bg-gray-100 hover:cursor-pointer"
-              >
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{lead.id}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{lead.name}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{lead.company}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{lead.email}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{lead.source}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{lead.score}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
-                    <StatusBadge status={lead.status} />
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
-                    <button
-                      className="flex items-center gap-2 rounded-md bg-[var(--primary-color)] px-3 py-1.5 text-xs text-white shadow-sm hover:bg-opacity-90"
-                      onClick={() => handleConvertLead(lead)}
-                    >
-                      <span className="material-symbols-outlined text-base">
-                        <TrendingUp size={16} />
-                      </span>
-                      Convert Lead
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-
-  function handleConvertLead(lead: LeadProps) {
-    setSelectedLead(lead);
-    setShowOpportunityPanel(true);
-  }
-
-  function loadSelectedStatus() {
-    const statusDataStorage = getDataStorage("msc-selectedStatus");
-
-    setSelectedStatus(statusDataStorage || null);
-  }
-
-  function loadOptionsStatus() {
-    const statusList = staticLeads.map((lead) => lead.status);
-    const uniqueOptionsStatusList = Array.from(new Set(statusList));
-
-    const optionsStatusList = uniqueOptionsStatusList.map((status) => {
-      return {
-        status,
-        checked: true,
-      };
-    });
-
-    setUniqueStatusList(optionsStatusList);
   }
 
   function searchLeadsByNameOrCompany(query: string) {
@@ -463,358 +180,40 @@ function App() {
     return filteredLeads;
   }
 
-  const opportunities = [
-    {
-      id: 1,
-      name: "Opportunity 1",
-      stage: "Negotiation",
-      amount: 54263,
-      accountName: "Edwards-Simmons",
-    },
-    {
-      id: 2,
-      name: "Opportunity 2",
-      stage: "Closed Won",
-      amount: 64848,
-      accountName: "Craig-Whitney",
-    },
-    {
-      id: 3,
-      name: "Opportunity 3",
-      stage: "Proposal",
-      amount: 58194,
-      accountName: "Leon, Lee and Mccullough",
-    },
-    {
-      id: 4,
-      name: "Opportunity 4",
-      stage: "Negotiation",
-      amount: null,
-      accountName: "Johnson-Evans",
-    },
-    {
-      id: 5,
-      name: "Opportunity 5",
-      stage: "Prospecting",
-      amount: 98284,
-      accountName: "Berg PLC",
-    },
-    {
-      id: 6,
-      name: "Opportunity 6",
-      stage: "Closed Lost",
-      amount: null,
-      accountName: "Stephens Group",
-    },
-    {
-      id: 7,
-      name: "Opportunity 7",
-      stage: "Qualification",
-      amount: 75923,
-      accountName: "Cruz-Martin",
-    },
-    {
-      id: 8,
-      name: "Opportunity 8",
-      stage: "Proposal",
-      amount: null,
-      accountName: "Williams-Buchanan",
-    },
-    {
-      id: 9,
-      name: "Opportunity 9",
-      stage: "Prospecting",
-      amount: 55523,
-      accountName: "Mccoy Group",
-    },
-    {
-      id: 10,
-      name: "Opportunity 10",
-      stage: "Proposal",
-      amount: 45922,
-      accountName: "Brown Ltd",
-    },
-    {
-      id: 11,
-      name: "Opportunity 11",
-      stage: "Closed Won",
-      amount: 9155,
-      accountName: "Robinson-Turner",
-    },
-    {
-      id: 12,
-      name: "Opportunity 12",
-      stage: "Closed Lost",
-      amount: null,
-      accountName: "Brennan PLC",
-    },
-    {
-      id: 13,
-      name: "Opportunity 13",
-      stage: "Qualification",
-      amount: 34281,
-      accountName: "Wilson-Acosta",
-    },
-    {
-      id: 14,
-      name: "Opportunity 14",
-      stage: "Proposal",
-      amount: 52485,
-      accountName: "Fox Inc",
-    },
-    {
-      id: 15,
-      name: "Opportunity 15",
-      stage: "Qualification",
-      amount: null,
-      accountName: "Bell-Rodriguez",
-    },
-    {
-      id: 16,
-      name: "Opportunity 16",
-      stage: "Qualification",
-      amount: null,
-      accountName: "Ellis-Ross",
-    },
-    {
-      id: 17,
-      name: "Opportunity 17",
-      stage: "Proposal",
-      amount: null,
-      accountName: "Chavez, Lawson and Harris",
-    },
-    {
-      id: 18,
-      name: "Opportunity 18",
-      stage: "Closed Lost",
-      amount: null,
-      accountName: "Silva-Washington",
-    },
-    {
-      id: 19,
-      name: "Opportunity 19",
-      stage: "Closed Lost",
-      amount: null,
-      accountName: "Gallegos-Wu",
-    },
-    {
-      id: 20,
-      name: "Opportunity 20",
-      stage: "Negotiation",
-      amount: null,
-      accountName: "Fox Inc",
-    },
-    {
-      id: 21,
-      name: "Opportunity 21",
-      stage: "Closed Lost",
-      amount: null,
-      accountName: "Sanchez, Ruiz and Castro",
-    },
-    {
-      id: 22,
-      name: "Opportunity 22",
-      stage: "Prospecting",
-      amount: null,
-      accountName: "Chavez, Lawson and Harris",
-    },
-    {
-      id: 23,
-      name: "Opportunity 23",
-      stage: "Proposal",
-      amount: null,
-      accountName: "Schroeder PLC",
-    },
-    {
-      id: 24,
-      name: "Opportunity 24",
-      stage: "Closed Lost",
-      amount: 43347,
-      accountName: "Young, Russell and Jenkins",
-    },
-    {
-      id: 25,
-      name: "Opportunity 25",
-      stage: "Negotiation",
-      amount: null,
-      accountName: "Brennan PLC",
-    },
-    {
-      id: 26,
-      name: "Opportunity 26",
-      stage: "Proposal",
-      amount: null,
-      accountName: "House Inc",
-    },
-    {
-      id: 27,
-      name: "Opportunity 27",
-      stage: "Closed Lost",
-      amount: 17944,
-      accountName: "Cordova-Perry",
-    },
-    {
-      id: 28,
-      name: "Opportunity 28",
-      stage: "Closed Won",
-      amount: 89905,
-      accountName: "Estrada Group",
-    },
-    {
-      id: 29,
-      name: "Opportunity 29",
-      stage: "Qualification",
-      amount: null,
-      accountName: "Cruz-Martin",
-    },
-    {
-      id: 30,
-      name: "Opportunity 30",
-      stage: "Closed Won",
-      amount: null,
-      accountName: "Richards-Robles",
-    },
-    {
-      id: 31,
-      name: "Opportunity 31",
-      stage: "Prospecting",
-      amount: 19429,
-      accountName: "James-Thompson",
-    },
-    {
-      id: 32,
-      name: "Opportunity 32",
-      stage: "Negotiation",
-      amount: null,
-      accountName: "Chavez, Lawson and Harris",
-    },
-    {
-      id: 33,
-      name: "Opportunity 33",
-      stage: "Closed Won",
-      amount: 42625,
-      accountName: "Wilson-Salazar",
-    },
-    {
-      id: 34,
-      name: "Opportunity 34",
-      stage: "Negotiation",
-      amount: null,
-      accountName: "Nunez-Stewart",
-    },
-    {
-      id: 35,
-      name: "Opportunity 35",
-      stage: "Proposal",
-      amount: null,
-      accountName: "Duncan PLC",
-    },
-    {
-      id: 36,
-      name: "Opportunity 36",
-      stage: "Prospecting",
-      amount: null,
-      accountName: "Sanchez, Ruiz and Castro",
-    },
-    {
-      id: 37,
-      name: "Opportunity 37",
-      stage: "Qualification",
-      amount: null,
-      accountName: "Rogers PLC",
-    },
-    {
-      id: 38,
-      name: "Opportunity 38",
-      stage: "Negotiation",
-      amount: null,
-      accountName: "Wagner, Keller and Allen",
-    },
-    {
-      id: 39,
-      name: "Opportunity 39",
-      stage: "Closed Won",
-      amount: 83315,
-      accountName: "Young, Russell and Jenkins",
-    },
-    {
-      id: 40,
-      name: "Opportunity 40",
-      stage: "Qualification",
-      amount: 76483,
-      accountName: "Sanchez, Ruiz and Castro",
-    },
-    {
-      id: 41,
-      name: "Opportunity 41",
-      stage: "Closed Won",
-      amount: null,
-      accountName: "Frank Inc",
-    },
-    {
-      id: 42,
-      name: "Opportunity 42",
-      stage: "Prospecting",
-      amount: 93183,
-      accountName: "Williams-Buchanan",
-    },
-    {
-      id: 43,
-      name: "Opportunity 43",
-      stage: "Closed Won",
-      amount: 99391,
-      accountName: "Richards-Robles",
-    },
-    {
-      id: 44,
-      name: "Opportunity 44",
-      stage: "Negotiation",
-      amount: null,
-      accountName: "Richard Group",
-    },
-    {
-      id: 45,
-      name: "Opportunity 45",
-      stage: "Prospecting",
-      amount: 72523,
-      accountName: "Flores, Wallace and Leonard",
-    },
-    {
-      id: 46,
-      name: "Opportunity 46",
-      stage: "Proposal",
-      amount: 85664,
-      accountName: "Moore Group",
-    },
-    {
-      id: 47,
-      name: "Opportunity 47",
-      stage: "Qualification",
-      amount: 81972,
-      accountName: "Robinson LLC",
-    },
-    {
-      id: 48,
-      name: "Opportunity 48",
-      stage: "Negotiation",
-      amount: 13506,
-      accountName: "Wagner, Keller and Allen",
-    },
-    {
-      id: 49,
-      name: "Opportunity 49",
-      stage: "Negotiation",
-      amount: 64483,
-      accountName: "Fox Inc",
-    },
-    {
-      id: 50,
-      name: "Opportunity 50",
-      stage: "Closed Lost",
-      amount: 85079,
-      accountName: "Brandt LLC",
-    },
-  ];
+  function renderLeads() {
+    const filteredLeads = searchLeadsByNameOrCompany(searchLeads);
+
+    return (
+      <LeadsTable
+        filteredLeads={filteredLeads}
+        handleConvertLead={handleConvertLead}
+        handleShowLeadPanel={handleShowLeadPanel}
+      />
+    );
+  }
+
+  function renderSortScoreIcon() {
+    return typeSortScore === "desc" ? (
+      <ArrowDownWideNarrow size={16} />
+    ) : (
+      <ArrowUpWideNarrow size={16} />
+    );
+  }
+
+  function renderLeadPanel() {
+    if (!showLeadPanel || !selectedLead) return <></>;
+
+    return (
+      <LeadPanel
+        selectedLead={selectedLead}
+        setSelectedLead={setSelectedLead}
+        setShowLeadPanel={setShowLeadPanel}
+        showLeadPanel={showLeadPanel}
+        uniqueStatusList={uniqueStatusList}
+        selectedStatus={selectedStatus}
+      />
+    );
+  }
 
   return (
     <main className="flex-1 overflow-y-auto p-8">
@@ -850,10 +249,11 @@ function App() {
 
         {showOpportunityPanel && (
           <OpportunityPanelModal
-            lead={selectedLead}
+            selectedLead={selectedLead}
             setShowOpportunityPanel={setShowOpportunityPanel}
             opportunities={opportunities}
             setSelectedLead={setSelectedLead}
+            setOpportunities={setOpportunities}
           />
         )}
       </div>
