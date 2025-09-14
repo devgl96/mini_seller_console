@@ -1,902 +1,902 @@
 [
     {
         "id": 1,
-        "name": "Vanessa Rodriguez",
-        "company": "Perez-Mason",
-        "email": "vanessa.rodriguez@perez-mason.com",
-        "source": "LinkedIn",
-        "score": 6,
-        "status": "Proposal Sent"
+        "name": "Kelly Yang",
+        "company": "Richardson-Morgan",
+        "email": "kelly.yang@olsen.net",
+        "source": "Referral",
+        "score": 82,
+        "status": "Qualified"
     },
     {
         "id": 2,
-        "name": "Pedro Charles",
-        "company": "Anderson Ltd",
-        "email": "pedro.charles@andersonltd.com",
-        "source": "LinkedIn",
-        "score": 89,
-        "status": "Proposal Sent"
+        "name": "Sandra Aguilar",
+        "company": "Santos-Hines",
+        "email": "sandra.aguilar@cox.com",
+        "source": "Event",
+        "score": 38,
+        "status": "Unqualified"
     },
     {
         "id": 3,
-        "name": "Sharon Morgan",
-        "company": "Harris-Morgan",
-        "email": "sharon.morgan@harris-morgan.com",
-        "source": "Referral",
-        "score": 32,
-        "status": "Closed Won"
+        "name": "Fernando Atkinson",
+        "company": "Durham, Barnes and Pace",
+        "email": "fernando.atkinson@mcmillan.com",
+        "source": "Event",
+        "score": 42,
+        "status": "Contacted"
     },
     {
         "id": 4,
-        "name": "Matthew Henderson",
-        "company": "Vasquez-Ramirez",
-        "email": "matthew.henderson@vasquez-ramirez.com",
-        "source": "Referral",
-        "score": 90,
-        "status": "Closed Lost"
+        "name": "Alejandra Grimes",
+        "company": "Little-Vasquez",
+        "email": "alejandra.grimes@mccormick-oconnor.com",
+        "source": "Event",
+        "score": 82,
+        "status": "Qualified"
     },
     {
         "id": 5,
-        "name": "Johnny Coffey V",
-        "company": "Sutton-Payne",
-        "email": "johnny.v@sutton-payne.com",
-        "source": "LinkedIn",
-        "score": 58,
+        "name": "Raymond Brown",
+        "company": "Mullins Group",
+        "email": "raymond.brown@daniel.org",
+        "source": "Website",
+        "score": 42,
         "status": "New"
     },
     {
         "id": 6,
-        "name": "Justin Mills",
-        "company": "Adams and Sons",
-        "email": "justin.mills@adamsandsons.com",
-        "source": "Event",
-        "score": 40,
-        "status": "Closed Lost"
+        "name": "Mitchell Craig",
+        "company": "Osborn LLC",
+        "email": "mitchell.craig@wright.com",
+        "source": "Referral",
+        "score": 43,
+        "status": "Contacted"
     },
     {
         "id": 7,
-        "name": "Laura Chen",
-        "company": "Johnson-Adams",
-        "email": "laura.chen@johnson-adams.com",
-        "source": "Event",
-        "score": 29,
-        "status": "Proposal Sent"
+        "name": "Gregory Lucero",
+        "company": "Bonilla PLC",
+        "email": "gregory.lucero@norman-fitzpatrick.com",
+        "source": "Cold Email",
+        "score": 36,
+        "status": "Qualified"
     },
     {
         "id": 8,
-        "name": "Mr. Christopher Mcdonald",
-        "company": "Gibson and Sons",
-        "email": "mr..mcdonald@gibsonandsons.com",
+        "name": "Lori Guerrero",
+        "company": "Ray-Davis",
+        "email": "lori.guerrero@tucker.com",
         "source": "Website",
-        "score": 17,
+        "score": 9,
         "status": "Contacted"
     },
     {
         "id": 9,
-        "name": "Angela Meadows",
-        "company": "Watts and Sons",
-        "email": "angela.meadows@wattsandsons.com",
-        "source": "Website",
-        "score": 10,
-        "status": "Qualified"
+        "name": "Scott Daniels",
+        "company": "Campbell, Barnes and Alvarado",
+        "email": "scott.daniels@macdonald.com",
+        "source": "Cold Email",
+        "score": 17,
+        "status": "Contacted"
     },
     {
         "id": 10,
-        "name": "James Davis",
-        "company": "Smith-Mccullough",
-        "email": "james.davis@smith-mccullough.com",
-        "source": "Website",
-        "score": 92,
-        "status": "Closed Lost"
+        "name": "Gregory Parrish",
+        "company": "Smith, Kelly and Bond",
+        "email": "gregory.parrish@wilson.org",
+        "source": "LinkedIn",
+        "score": 13,
+        "status": "Unqualified"
     },
     {
         "id": 11,
-        "name": "Mark Rogers",
-        "company": "Lynch Inc",
-        "email": "mark.rogers@lynchinc.com",
-        "source": "LinkedIn",
-        "score": 60,
-        "status": "Closed Won"
+        "name": "Amy Johnson",
+        "company": "Boyer, Perez and Greene",
+        "email": "amy.johnson@weaver.com",
+        "source": "Referral",
+        "score": 35,
+        "status": "Contacted"
     },
     {
         "id": 12,
-        "name": "Sarah Scott",
-        "company": "Randall-Ellis",
-        "email": "sarah.scott@randall-ellis.com",
+        "name": "Jessica Moody",
+        "company": "Morris-Mcdonald",
+        "email": "jessica.moody@jensen.com",
+        "source": "Event",
+        "score": 97,
+        "status": "Contacted"
+    },
+    {
+        "id": 13,
+        "name": "Latasha Mccoy",
+        "company": "Thompson, Cherry and Berry",
+        "email": "latasha.mccoy@george-green.com",
+        "source": "Cold Email",
+        "score": 29,
+        "status": "New"
+    },
+    {
+        "id": 14,
+        "name": "Tyler Wagner",
+        "company": "Luna-Kennedy",
+        "email": "tyler.wagner@melton.com",
+        "source": "Website",
+        "score": 4,
+        "status": "Unqualified"
+    },
+    {
+        "id": 15,
+        "name": "William Ortiz",
+        "company": "Hill-Compton",
+        "email": "william.ortiz@smith.org",
+        "source": "Event",
+        "score": 78,
+        "status": "Contacted"
+    },
+    {
+        "id": 16,
+        "name": "Robin Kim",
+        "company": "Mccall, Livingston and Brown",
+        "email": "robin.kim@cannon-franklin.info",
+        "source": "Cold Email",
+        "score": 46,
+        "status": "Qualified"
+    },
+    {
+        "id": 17,
+        "name": "Michael Harrison",
+        "company": "Perry-Henry",
+        "email": "michael.harrison@cunningham.com",
+        "source": "Referral",
+        "score": 42,
+        "status": "Contacted"
+    },
+    {
+        "id": 18,
+        "name": "Craig Davis",
+        "company": "Vega-Lee",
+        "email": "craig.davis@golden-collins.com",
+        "source": "Event",
+        "score": 93,
+        "status": "Contacted"
+    },
+    {
+        "id": 19,
+        "name": "Lisa Harris",
+        "company": "Santiago Inc",
+        "email": "lisa.harris@cole.biz",
+        "source": "Cold Email",
+        "score": 88,
+        "status": "Unqualified"
+    },
+    {
+        "id": 20,
+        "name": "Douglas Hudson",
+        "company": "Duncan, Knapp and Adkins",
+        "email": "douglas.hudson@johnson.com",
+        "source": "Website",
+        "score": 98,
+        "status": "New"
+    },
+    {
+        "id": 21,
+        "name": "John Cannon",
+        "company": "Brown-Walker",
+        "email": "john.cannon@tapia-morales.net",
+        "source": "Cold Email",
+        "score": 55,
+        "status": "Qualified"
+    },
+    {
+        "id": 22,
+        "name": "Robin Clark",
+        "company": "Thompson and Sons",
+        "email": "robin.clark@jenkins.info",
+        "source": "Website",
+        "score": 75,
+        "status": "Contacted"
+    },
+    {
+        "id": 23,
+        "name": "Sarah Bates",
+        "company": "Wyatt-Hebert",
+        "email": "sarah.bates@gillespie.com",
+        "source": "Cold Email",
+        "score": 51,
+        "status": "Contacted"
+    },
+    {
+        "id": 24,
+        "name": "Reginald Johnson",
+        "company": "Cook, Garcia and Brown",
+        "email": "reginald.johnson@sullivan.net",
+        "source": "LinkedIn",
+        "score": 55,
+        "status": "New"
+    },
+    {
+        "id": 25,
+        "name": "Deborah Green",
+        "company": "Jones-Harris",
+        "email": "deborah.green@carson.com",
+        "source": "Cold Email",
+        "score": 77,
+        "status": "New"
+    },
+    {
+        "id": 26,
+        "name": "Stephanie Mason",
+        "company": "Blair-Vazquez",
+        "email": "stephanie.mason@cunningham.biz",
+        "source": "Event",
+        "score": 89,
+        "status": "Unqualified"
+    },
+    {
+        "id": 27,
+        "name": "Denise Gill",
+        "company": "Johnson, Patel and Shields",
+        "email": "denise.gill@johnston-fuller.com",
+        "source": "Event",
+        "score": 9,
+        "status": "Qualified"
+    },
+    {
+        "id": 28,
+        "name": "Sara Patterson",
+        "company": "Holloway Ltd",
+        "email": "sara.patterson@rodgers-thomas.com",
+        "source": "LinkedIn",
+        "score": 11,
+        "status": "Contacted"
+    },
+    {
+        "id": 29,
+        "name": "Jamie Yang",
+        "company": "Wells-Lewis",
+        "email": "jamie.yang@lopez.info",
+        "source": "Event",
+        "score": 39,
+        "status": "New"
+    },
+    {
+        "id": 30,
+        "name": "Darlene Trevino",
+        "company": "Garcia, Palmer and Walker",
+        "email": "darlene.trevino@johnson.com",
+        "source": "Event",
+        "score": 16,
+        "status": "Unqualified"
+    },
+    {
+        "id": 31,
+        "name": "Michael Fox",
+        "company": "Powell-Hardin",
+        "email": "michael.fox@gonzalez.com",
+        "source": "Referral",
+        "score": 86,
+        "status": "Unqualified"
+    },
+    {
+        "id": 32,
+        "name": "Lauren Watts",
+        "company": "Farrell, Stokes and Miller",
+        "email": "lauren.watts@calhoun.com",
+        "source": "Referral",
+        "score": 24,
+        "status": "New"
+    },
+    {
+        "id": 33,
+        "name": "Daniel Richards",
+        "company": "Jackson PLC",
+        "email": "daniel.richards@jones-michael.com",
+        "source": "Event",
+        "score": 35,
+        "status": "Qualified"
+    },
+    {
+        "id": 34,
+        "name": "Amanda Krause",
+        "company": "Schroeder and Sons",
+        "email": "amanda.krause@hall-ferguson.com",
+        "source": "Website",
+        "score": 54,
+        "status": "Qualified"
+    },
+    {
+        "id": 35,
+        "name": "Ronald Weiss",
+        "company": "Hughes-Lopez",
+        "email": "ronald.weiss@rhodes.net",
+        "source": "Event",
+        "score": 95,
+        "status": "New"
+    },
+    {
+        "id": 36,
+        "name": "Nancy Dominguez",
+        "company": "Rodriguez-Rose",
+        "email": "nancy.dominguez@watson-miller.com",
+        "source": "Referral",
+        "score": 77,
+        "status": "Qualified"
+    },
+    {
+        "id": 37,
+        "name": "Angel Mueller",
+        "company": "Lester-Farrell",
+        "email": "angel.mueller@kerr-rivera.com",
+        "source": "Event",
+        "score": 50,
+        "status": "New"
+    },
+    {
+        "id": 38,
+        "name": "Natasha Goodwin",
+        "company": "King PLC",
+        "email": "natasha.goodwin@vazquez.org",
         "source": "Cold Email",
         "score": 54,
         "status": "New"
     },
     {
-        "id": 13,
-        "name": "Alexandria Gonzales",
-        "company": "Barker LLC",
-        "email": "alexandria.gonzales@barkerllc.com",
-        "source": "Referral",
-        "score": 80,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 14,
-        "name": "John Nguyen",
-        "company": "Perez, Hunter and Everett",
-        "email": "john.nguyen@perez,hunterandeverett.com",
-        "source": "Website",
-        "score": 26,
-        "status": "Contacted"
-    },
-    {
-        "id": 15,
-        "name": "Gregory Lopez",
-        "company": "Pope, Sawyer and Cooper",
-        "email": "gregory.lopez@pope,sawyerandcooper.com",
-        "source": "Referral",
-        "score": 30,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 16,
-        "name": "Virginia Phillips",
-        "company": "Weaver-Morgan",
-        "email": "virginia.phillips@weaver-morgan.com",
-        "source": "Website",
-        "score": 71,
-        "status": "Contacted"
-    },
-    {
-        "id": 17,
-        "name": "Stephanie Ross",
-        "company": "Pena Group",
-        "email": "stephanie.ross@penagroup.com",
-        "source": "Website",
-        "score": 73,
-        "status": "Closed Won"
-    },
-    {
-        "id": 18,
-        "name": "Joseph Espinoza",
-        "company": "Rose, Griffin and Cook",
-        "email": "joseph.espinoza@rose,griffinandcook.com",
-        "source": "Website",
-        "score": 74,
-        "status": "Closed Won"
-    },
-    {
-        "id": 19,
-        "name": "Kathy Robinson",
-        "company": "Yates, Campbell and Evans",
-        "email": "kathy.robinson@yates,campbellandevans.com",
-        "source": "Website",
-        "score": 38,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 20,
-        "name": "Mary Boyle",
-        "company": "Baker LLC",
-        "email": "mary.boyle@bakerllc.com",
-        "source": "Website",
-        "score": 97,
-        "status": "Qualified"
-    },
-    {
-        "id": 21,
-        "name": "Nina Branch",
-        "company": "Smith, Nguyen and Stone",
-        "email": "nina.branch@smith,nguyenandstone.com",
-        "source": "Event",
-        "score": 55,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 22,
-        "name": "Timothy Peters",
-        "company": "Grimes, Moyer and Black",
-        "email": "timothy.peters@grimes,moyerandblack.com",
-        "source": "Cold Email",
-        "score": 4,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 23,
-        "name": "Tony Hardy",
-        "company": "Goodman, Johnson and Montes",
-        "email": "tony.hardy@goodman,johnsonandmontes.com",
-        "source": "Cold Email",
-        "score": 23,
-        "status": "Qualified"
-    },
-    {
-        "id": 24,
-        "name": "Ethan Gibson",
-        "company": "Romero-Martinez",
-        "email": "ethan.gibson@romero-martinez.com",
-        "source": "Referral",
-        "score": 36,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 25,
-        "name": "John Hicks",
-        "company": "Bush, Johnson and Griffith",
-        "email": "john.hicks@bush,johnsonandgriffith.com",
-        "source": "Referral",
-        "score": 92,
-        "status": "Closed Lost"
-    },
-    {
-        "id": 26,
-        "name": "Norman Garcia",
-        "company": "Kim, Lee and Kirk",
-        "email": "norman.garcia@kim,leeandkirk.com",
-        "source": "Cold Email",
-        "score": 58,
-        "status": "Closed Won"
-    },
-    {
-        "id": 27,
-        "name": "Ashley Montoya",
-        "company": "Moore, Johnson and Williams",
-        "email": "ashley.montoya@moore,johnsonandwilliams.com",
-        "source": "Referral",
-        "score": 71,
-        "status": "Qualified"
-    },
-    {
-        "id": 28,
-        "name": "Mark Salinas",
-        "company": "Gonzales LLC",
-        "email": "mark.salinas@gonzalesllc.com",
-        "source": "Cold Email",
-        "score": 39,
-        "status": "Contacted"
-    },
-    {
-        "id": 29,
-        "name": "James Baker",
-        "company": "Cox LLC",
-        "email": "james.baker@coxllc.com",
-        "source": "Website",
-        "score": 61,
-        "status": "Contacted"
-    },
-    {
-        "id": 30,
-        "name": "Sheila Steele",
-        "company": "Anderson-Ashley",
-        "email": "sheila.steele@anderson-ashley.com",
-        "source": "Cold Email",
-        "score": 22,
-        "status": "Qualified"
-    },
-    {
-        "id": 31,
-        "name": "Christopher Rhodes",
-        "company": "Turner-Cox",
-        "email": "christopher.rhodes@turner-cox.com",
-        "source": "Event",
-        "score": 29,
-        "status": "Contacted"
-    },
-    {
-        "id": 32,
-        "name": "Richard Mercer",
-        "company": "Kelley-Russell",
-        "email": "richard.mercer@kelley-russell.com",
-        "source": "Event",
-        "score": 8,
-        "status": "Closed Lost"
-    },
-    {
-        "id": 33,
-        "name": "Maria Nelson",
-        "company": "Fernandez Inc",
-        "email": "maria.nelson@fernandezinc.com",
-        "source": "Event",
-        "score": 65,
-        "status": "Closed Lost"
-    },
-    {
-        "id": 34,
-        "name": "Monica Hart",
-        "company": "Gallegos LLC",
-        "email": "monica.hart@gallegosllc.com",
-        "source": "Website",
-        "score": 100,
-        "status": "Closed Lost"
-    },
-    {
-        "id": 35,
-        "name": "Samantha Washington",
-        "company": "Gilbert-Garcia",
-        "email": "samantha.washington@gilbert-garcia.com",
-        "source": "Referral",
-        "score": 84,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 36,
-        "name": "Brandon Martin",
-        "company": "Harris PLC",
-        "email": "brandon.martin@harrisplc.com",
-        "source": "Cold Email",
-        "score": 15,
-        "status": "Contacted"
-    },
-    {
-        "id": 37,
-        "name": "Nicole Salazar",
-        "company": "Smith PLC",
-        "email": "nicole.salazar@smithplc.com",
-        "source": "Referral",
-        "score": 42,
-        "status": "Closed Lost"
-    },
-    {
-        "id": 38,
-        "name": "Jerry Rodriguez",
-        "company": "Holloway PLC",
-        "email": "jerry.rodriguez@hollowayplc.com",
-        "source": "Cold Email",
-        "score": 65,
-        "status": "Proposal Sent"
-    },
-    {
         "id": 39,
-        "name": "Stephanie Holmes",
-        "company": "Knapp Ltd",
-        "email": "stephanie.holmes@knappltd.com",
-        "source": "Cold Email",
-        "score": 34,
-        "status": "Closed Lost"
+        "name": "Joshua Miller",
+        "company": "Jones, Roberts and Schwartz",
+        "email": "joshua.miller@morrow-wilson.net",
+        "source": "Referral",
+        "score": 11,
+        "status": "Contacted"
     },
     {
         "id": 40,
-        "name": "Emily Case",
-        "company": "Greer Group",
-        "email": "emily.case@greergroup.com",
-        "source": "Cold Email",
-        "score": 52,
-        "status": "Proposal Sent"
+        "name": "Sean Weaver",
+        "company": "Ryan-Weber",
+        "email": "sean.weaver@hernandez-mcdaniel.com",
+        "source": "Referral",
+        "score": 11,
+        "status": "Unqualified"
     },
     {
         "id": 41,
-        "name": "Jessica Henderson",
-        "company": "Garcia and Sons",
-        "email": "jessica.henderson@garciaandsons.com",
-        "source": "Referral",
-        "score": 23,
-        "status": "Contacted"
+        "name": "Duane Winters",
+        "company": "Stephenson, Cook and Price",
+        "email": "duane.winters@james.biz",
+        "source": "Website",
+        "score": 77,
+        "status": "New"
     },
     {
         "id": 42,
-        "name": "Joel Carr",
-        "company": "Roth, Choi and Travis",
-        "email": "joel.carr@roth,choiandtravis.com",
-        "source": "Website",
-        "score": 84,
+        "name": "Monica Adams",
+        "company": "Hernandez, Maldonado and Griffin",
+        "email": "monica.adams@cook.info",
+        "source": "Cold Email",
+        "score": 47,
         "status": "Contacted"
     },
     {
         "id": 43,
-        "name": "Sara Newton",
-        "company": "Nguyen, Watson and Huerta",
-        "email": "sara.newton@nguyen,watsonandhuerta.com",
+        "name": "Elizabeth Smith",
+        "company": "Valdez, Alexander and Hernandez",
+        "email": "elizabeth.smith@guzman-rodriguez.org",
         "source": "Referral",
-        "score": 13,
-        "status": "Closed Won"
-    },
-    {
-        "id": 44,
-        "name": "Dylan Bush",
-        "company": "Fisher, Mathis and Brown",
-        "email": "dylan.bush@fisher,mathisandbrown.com",
-        "source": "Event",
-        "score": 23,
+        "score": 54,
         "status": "Qualified"
     },
     {
-        "id": 45,
-        "name": "Krystal Lucas",
-        "company": "Mitchell Ltd",
-        "email": "krystal.lucas@mitchellltd.com",
-        "source": "Event",
-        "score": 83,
-        "status": "Closed Won"
-    },
-    {
-        "id": 46,
-        "name": "Christopher Owens",
-        "company": "Reed, Gaines and Patterson",
-        "email": "christopher.owens@reed,gainesandpatterson.com",
+        "id": 44,
+        "name": "Miss Maureen Maxwell",
+        "company": "Jensen-Riddle",
+        "email": "miss.maxwell@bradford.com",
         "source": "Cold Email",
         "score": 94,
         "status": "Qualified"
     },
     {
+        "id": 45,
+        "name": "Cindy Mccann",
+        "company": "Wolf Inc",
+        "email": "cindy.mccann@benjamin.org",
+        "source": "Website",
+        "score": 92,
+        "status": "Unqualified"
+    },
+    {
+        "id": 46,
+        "name": "Tara Adams",
+        "company": "Bryant Group",
+        "email": "tara.adams@moore.com",
+        "source": "Website",
+        "score": 10,
+        "status": "New"
+    },
+    {
         "id": 47,
-        "name": "Cameron Braun",
-        "company": "Cain-Simon",
-        "email": "cameron.braun@cain-simon.com",
-        "source": "Event",
-        "score": 50,
-        "status": "Contacted"
+        "name": "Zachary Smith",
+        "company": "Beasley, Reed and Mejia",
+        "email": "zachary.smith@gomez-sherman.biz",
+        "source": "Referral",
+        "score": 21,
+        "status": "New"
     },
     {
         "id": 48,
-        "name": "Jennifer Cummings",
-        "company": "Clark-Smith",
-        "email": "jennifer.cummings@clark-smith.com",
+        "name": "Natalie Shelton",
+        "company": "Cox-Gilbert",
+        "email": "natalie.shelton@young.com",
         "source": "Cold Email",
-        "score": 33,
-        "status": "Contacted"
+        "score": 78,
+        "status": "Unqualified"
     },
     {
         "id": 49,
-        "name": "Melinda Harding",
-        "company": "Weber Group",
-        "email": "melinda.harding@webergroup.com",
-        "source": "Cold Email",
-        "score": 79,
-        "status": "Closed Lost"
+        "name": "Kevin Murillo",
+        "company": "Singh-Lin",
+        "email": "kevin.murillo@duran-lopez.com",
+        "source": "LinkedIn",
+        "score": 2,
+        "status": "Qualified"
     },
     {
         "id": 50,
-        "name": "Adam Mullins",
-        "company": "Young LLC",
-        "email": "adam.mullins@youngllc.com",
-        "source": "Event",
-        "score": 79,
-        "status": "New"
+        "name": "Jessica Golden",
+        "company": "Carter-Williams",
+        "email": "jessica.golden@johnson.com",
+        "source": "LinkedIn",
+        "score": 11,
+        "status": "Qualified"
     },
     {
         "id": 51,
-        "name": "Jeffery Gonzalez",
-        "company": "Cooper-Carter",
-        "email": "jeffery.gonzalez@cooper-carter.com",
-        "source": "Cold Email",
-        "score": 32,
-        "status": "Contacted"
+        "name": "Joseph Gardner",
+        "company": "Brewer, Powell and White",
+        "email": "joseph.gardner@woodward-palmer.com",
+        "source": "Referral",
+        "score": 29,
+        "status": "Qualified"
     },
     {
         "id": 52,
-        "name": "Robert Morton",
-        "company": "Cruz, Bennett and Koch",
-        "email": "robert.morton@cruz,bennettandkoch.com",
-        "source": "Website",
-        "score": 11,
-        "status": "New"
+        "name": "Michelle Hunter",
+        "company": "Wu Ltd",
+        "email": "michelle.hunter@roach.info",
+        "source": "Referral",
+        "score": 40,
+        "status": "Unqualified"
     },
     {
         "id": 53,
-        "name": "Kayla Hopkins",
-        "company": "Rogers-Irwin",
-        "email": "kayla.hopkins@rogers-irwin.com",
-        "source": "Cold Email",
-        "score": 52,
+        "name": "Christina Gibson",
+        "company": "Cook-Torres",
+        "email": "christina.gibson@white.net",
+        "source": "LinkedIn",
+        "score": 63,
         "status": "Qualified"
     },
     {
         "id": 54,
-        "name": "Audrey Marshall",
-        "company": "Henry, Watson and Wagner",
-        "email": "audrey.marshall@henry,watsonandwagner.com",
-        "source": "Cold Email",
-        "score": 100,
-        "status": "New"
+        "name": "Sara Lewis",
+        "company": "Blackwell-Thomas",
+        "email": "sara.lewis@schroeder.com",
+        "source": "Event",
+        "score": 62,
+        "status": "Unqualified"
     },
     {
         "id": 55,
-        "name": "Rachel Harmon",
-        "company": "Medina Group",
-        "email": "rachel.harmon@medinagroup.com",
-        "source": "Event",
-        "score": 8,
-        "status": "Qualified"
+        "name": "Jasmin Hernandez",
+        "company": "Chapman, Taylor and Anderson",
+        "email": "jasmin.hernandez@douglas-mcgee.com",
+        "source": "LinkedIn",
+        "score": 63,
+        "status": "New"
     },
     {
         "id": 56,
-        "name": "Nicholas Scott",
-        "company": "Banks Inc",
-        "email": "nicholas.scott@banksinc.com",
-        "source": "Event",
-        "score": 49,
-        "status": "Closed Won"
+        "name": "Andrew Martinez",
+        "company": "Roberts Inc",
+        "email": "andrew.martinez@bailey.com",
+        "source": "LinkedIn",
+        "score": 22,
+        "status": "New"
     },
     {
         "id": 57,
-        "name": "Mr. Michael Schultz DVM",
-        "company": "Daniel, Cohen and Campbell",
-        "email": "mr..dvm@daniel,cohenandcampbell.com",
-        "source": "Event",
-        "score": 37,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 58,
-        "name": "Deanna Smith",
-        "company": "Wade and Sons",
-        "email": "deanna.smith@wadeandsons.com",
-        "source": "Referral",
-        "score": 26,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 59,
-        "name": "Sherry Jacobs",
-        "company": "Mathis Inc",
-        "email": "sherry.jacobs@mathisinc.com",
-        "source": "LinkedIn",
-        "score": 47,
-        "status": "Contacted"
-    },
-    {
-        "id": 60,
-        "name": "Francisco Collier",
-        "company": "Ross, Hickman and Wilson",
-        "email": "francisco.collier@ross,hickmanandwilson.com",
-        "source": "Website",
-        "score": 10,
+        "name": "Donald Henson",
+        "company": "King and Sons",
+        "email": "donald.henson@barnett.com",
+        "source": "Cold Email",
+        "score": 70,
         "status": "Qualified"
     },
     {
+        "id": 58,
+        "name": "Jorge Brown",
+        "company": "White-Moore",
+        "email": "jorge.brown@cross.biz",
+        "source": "LinkedIn",
+        "score": 100,
+        "status": "Qualified"
+    },
+    {
+        "id": 59,
+        "name": "John Allen",
+        "company": "Grant, Davis and Ramirez",
+        "email": "john.allen@peterson.com",
+        "source": "Referral",
+        "score": 41,
+        "status": "Unqualified"
+    },
+    {
+        "id": 60,
+        "name": "Danielle Burton",
+        "company": "Johnson-Vazquez",
+        "email": "danielle.burton@olson.com",
+        "source": "Website",
+        "score": 63,
+        "status": "Contacted"
+    },
+    {
         "id": 61,
-        "name": "Lisa Reyes",
-        "company": "Phillips and Sons",
-        "email": "lisa.reyes@phillipsandsons.com",
-        "source": "Event",
-        "score": 20,
-        "status": "Proposal Sent"
+        "name": "Sarah Sanders",
+        "company": "Cuevas, Grimes and Martin",
+        "email": "sarah.sanders@west.com",
+        "source": "Website",
+        "score": 3,
+        "status": "Unqualified"
     },
     {
         "id": 62,
-        "name": "Anthony Hanna",
-        "company": "Lewis-Davis",
-        "email": "anthony.hanna@lewis-davis.com",
+        "name": "Richard Roberts",
+        "company": "Neal-Martin",
+        "email": "richard.roberts@harding.com",
         "source": "Cold Email",
-        "score": 4,
-        "status": "Proposal Sent"
+        "score": 2,
+        "status": "Contacted"
     },
     {
         "id": 63,
-        "name": "Devin Sullivan",
-        "company": "Mccullough Group",
-        "email": "devin.sullivan@mcculloughgroup.com",
-        "source": "Event",
-        "score": 59,
+        "name": "Debbie Thompson",
+        "company": "Bell-Nielsen",
+        "email": "debbie.thompson@woodard.com",
+        "source": "Referral",
+        "score": 44,
         "status": "New"
     },
     {
         "id": 64,
-        "name": "Lisa Gonzales",
-        "company": "Jackson, Wood and Armstrong",
-        "email": "lisa.gonzales@jackson,woodandarmstrong.com",
+        "name": "Emily Martin",
+        "company": "Butler Inc",
+        "email": "emily.martin@oconnell-gonzalez.com",
         "source": "Referral",
-        "score": 64,
-        "status": "Contacted"
+        "score": 5,
+        "status": "New"
     },
     {
         "id": 65,
-        "name": "Jasmine Myers",
-        "company": "Ellison, Duncan and Wright",
-        "email": "jasmine.myers@ellison,duncanandwright.com",
-        "source": "Cold Email",
-        "score": 48,
-        "status": "Proposal Sent"
+        "name": "Brandy Anderson",
+        "company": "Anderson, Lewis and Curtis",
+        "email": "brandy.anderson@sanchez.info",
+        "source": "Website",
+        "score": 70,
+        "status": "New"
     },
     {
         "id": 66,
-        "name": "William Saunders",
-        "company": "Reed Inc",
-        "email": "william.saunders@reedinc.com",
-        "source": "Event",
-        "score": 28,
+        "name": "Scott Barry",
+        "company": "Allison-Marquez",
+        "email": "scott.barry@skinner-michael.org",
+        "source": "Website",
+        "score": 78,
         "status": "Contacted"
     },
     {
         "id": 67,
-        "name": "Eric Buckley",
-        "company": "Torres LLC",
-        "email": "eric.buckley@torresllc.com",
-        "source": "Cold Email",
-        "score": 80,
-        "status": "Closed Won"
+        "name": "Brittany Chavez",
+        "company": "Moreno PLC",
+        "email": "brittany.chavez@sutton.com",
+        "source": "Website",
+        "score": 48,
+        "status": "Contacted"
     },
     {
         "id": 68,
-        "name": "David Hogan",
-        "company": "Wiggins-Bennett",
-        "email": "david.hogan@wiggins-bennett.com",
-        "source": "LinkedIn",
-        "score": 29,
-        "status": "Closed Lost"
+        "name": "April Anderson",
+        "company": "Garza Group",
+        "email": "april.anderson@frye.com",
+        "source": "Event",
+        "score": 38,
+        "status": "Unqualified"
     },
     {
         "id": 69,
-        "name": "Sara Burton",
-        "company": "Bridges-Downs",
-        "email": "sara.burton@bridges-downs.com",
-        "source": "Cold Email",
-        "score": 45,
-        "status": "Contacted"
-    },
-    {
-        "id": 70,
-        "name": "George Adams",
-        "company": "Kane-Kennedy",
-        "email": "george.adams@kane-kennedy.com",
-        "source": "Referral",
-        "score": 9,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 71,
-        "name": "Madeline Stanley",
-        "company": "Butler-Warren",
-        "email": "madeline.stanley@butler-warren.com",
-        "source": "Cold Email",
-        "score": 87,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 72,
-        "name": "Sherry Richardson",
-        "company": "Mills, Tate and Franco",
-        "email": "sherry.richardson@mills,tateandfranco.com",
-        "source": "LinkedIn",
-        "score": 80,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 73,
-        "name": "Angela Johnson",
-        "company": "Reyes and Sons",
-        "email": "angela.johnson@reyesandsons.com",
-        "source": "Event",
-        "score": 85,
-        "status": "New"
-    },
-    {
-        "id": 74,
-        "name": "Kayla Nelson",
-        "company": "Petersen PLC",
-        "email": "kayla.nelson@petersenplc.com",
-        "source": "LinkedIn",
-        "score": 93,
-        "status": "Closed Lost"
-    },
-    {
-        "id": 75,
-        "name": "Christopher Hooper",
-        "company": "Ewing-Chavez",
-        "email": "christopher.hooper@ewing-chavez.com",
-        "source": "Cold Email",
-        "score": 97,
-        "status": "Contacted"
-    },
-    {
-        "id": 76,
-        "name": "Mario Todd",
-        "company": "Miller and Sons",
-        "email": "mario.todd@millerandsons.com",
-        "source": "Referral",
-        "score": 1,
-        "status": "Contacted"
-    },
-    {
-        "id": 77,
-        "name": "Tiffany Cervantes",
-        "company": "Cruz, Smith and Stone",
-        "email": "tiffany.cervantes@cruz,smithandstone.com",
-        "source": "Event",
-        "score": 31,
-        "status": "Closed Won"
-    },
-    {
-        "id": 78,
-        "name": "Edward Stone",
-        "company": "Davis, Allen and Bentley",
-        "email": "edward.stone@davis,allenandbentley.com",
-        "source": "Referral",
-        "score": 1,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 79,
-        "name": "Steven Russell",
-        "company": "Brooks-Haney",
-        "email": "steven.russell@brooks-haney.com",
-        "source": "LinkedIn",
-        "score": 30,
-        "status": "Closed Won"
-    },
-    {
-        "id": 80,
-        "name": "Clifford Reyes",
-        "company": "Peterson-Marshall",
-        "email": "clifford.reyes@peterson-marshall.com",
-        "source": "Website",
-        "score": 70,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 81,
-        "name": "Cory Williams",
-        "company": "Proctor Group",
-        "email": "cory.williams@proctorgroup.com",
-        "source": "Referral",
-        "score": 4,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 82,
-        "name": "Lisa Gordon",
-        "company": "Perkins and Sons",
-        "email": "lisa.gordon@perkinsandsons.com",
-        "source": "Referral",
-        "score": 59,
-        "status": "Qualified"
-    },
-    {
-        "id": 83,
-        "name": "Mark Thompson",
-        "company": "Barnes, Barber and Everett",
-        "email": "mark.thompson@barnes,barberandeverett.com",
-        "source": "LinkedIn",
-        "score": 77,
-        "status": "Closed Won"
-    },
-    {
-        "id": 84,
-        "name": "Elizabeth Smith",
-        "company": "Baker, Howell and West",
-        "email": "elizabeth.smith@baker,howellandwest.com",
-        "source": "LinkedIn",
-        "score": 71,
-        "status": "Contacted"
-    },
-    {
-        "id": 85,
-        "name": "Kim Barnes",
-        "company": "Mccoy-Myers",
-        "email": "kim.barnes@mccoy-myers.com",
-        "source": "LinkedIn",
-        "score": 53,
-        "status": "Closed Lost"
-    },
-    {
-        "id": 86,
-        "name": "Lisa Parker",
-        "company": "Collins, Douglas and Nelson",
-        "email": "lisa.parker@collins,douglasandnelson.com",
-        "source": "Website",
-        "score": 47,
-        "status": "Contacted"
-    },
-    {
-        "id": 87,
-        "name": "David Johnson",
-        "company": "Huff, Hall and Reed",
-        "email": "david.johnson@huff,hallandreed.com",
-        "source": "Referral",
-        "score": 86,
-        "status": "New"
-    },
-    {
-        "id": 88,
-        "name": "Kayla Wood",
-        "company": "Guerra LLC",
-        "email": "kayla.wood@guerrallc.com",
-        "source": "Website",
-        "score": 6,
-        "status": "New"
-    },
-    {
-        "id": 89,
-        "name": "Mark Roy",
-        "company": "Thompson LLC",
-        "email": "mark.roy@thompsonllc.com",
-        "source": "Website",
-        "score": 82,
-        "status": "Qualified"
-    },
-    {
-        "id": 90,
-        "name": "Jill Sullivan",
-        "company": "Dudley, Wade and White",
-        "email": "jill.sullivan@dudley,wadeandwhite.com",
-        "source": "LinkedIn",
-        "score": 55,
-        "status": "New"
-    },
-    {
-        "id": 91,
-        "name": "Luis Blevins",
-        "company": "Payne, Taylor and Carlson",
-        "email": "luis.blevins@payne,taylorandcarlson.com",
-        "source": "Website",
-        "score": 43,
-        "status": "Contacted"
-    },
-    {
-        "id": 92,
-        "name": "Sharon Sparks",
-        "company": "Wilkins-Patterson",
-        "email": "sharon.sparks@wilkins-patterson.com",
+        "name": "Adam Rodriguez",
+        "company": "Bray, Patterson and Griffin",
+        "email": "adam.rodriguez@rodriguez.net",
         "source": "Website",
         "score": 64,
         "status": "New"
     },
     {
-        "id": 93,
-        "name": "Kenneth Roy",
-        "company": "Kelley, Larson and Wood",
-        "email": "kenneth.roy@kelley,larsonandwood.com",
-        "source": "Website",
-        "score": 78,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 94,
-        "name": "Robert Francis",
-        "company": "Kramer Group",
-        "email": "robert.francis@kramergroup.com",
-        "source": "Event",
-        "score": 27,
-        "status": "Proposal Sent"
-    },
-    {
-        "id": 95,
-        "name": "Mark Dennis",
-        "company": "Frost-Bennett",
-        "email": "mark.dennis@frost-bennett.com",
-        "source": "Website",
-        "score": 24,
-        "status": "Closed Lost"
-    },
-    {
-        "id": 96,
-        "name": "Michael Ryan",
-        "company": "Campbell, Johnston and Parker",
-        "email": "michael.ryan@campbell,johnstonandparker.com",
-        "source": "Referral",
-        "score": 14,
-        "status": "Closed Won"
-    },
-    {
-        "id": 97,
-        "name": "Gregory Horton",
-        "company": "Barnes Ltd",
-        "email": "gregory.horton@barnesltd.com",
-        "source": "Referral",
-        "score": 77,
+        "id": 70,
+        "name": "Kelsey Brown",
+        "company": "Walker Inc",
+        "email": "kelsey.brown@rogers.net",
+        "source": "LinkedIn",
+        "score": 98,
         "status": "Qualified"
     },
     {
-        "id": 98,
-        "name": "Margaret Suarez",
-        "company": "Harrell-Mueller",
-        "email": "margaret.suarez@harrell-mueller.com",
+        "id": 71,
+        "name": "Rodney Davis",
+        "company": "Harris Group",
+        "email": "rodney.davis@mathews.net",
+        "source": "Website",
+        "score": 50,
+        "status": "Unqualified"
+    },
+    {
+        "id": 72,
+        "name": "Christian Reilly",
+        "company": "Beck Inc",
+        "email": "christian.reilly@austin.com",
+        "source": "Website",
+        "score": 85,
+        "status": "Contacted"
+    },
+    {
+        "id": 73,
+        "name": "Teresa Davis",
+        "company": "Aguilar, Mcclain and Smith",
+        "email": "teresa.davis@lewis.info",
+        "source": "Referral",
+        "score": 55,
+        "status": "Qualified"
+    },
+    {
+        "id": 74,
+        "name": "Cody Franco",
+        "company": "Powers-Mccarty",
+        "email": "cody.franco@macdonald.com",
+        "source": "Referral",
+        "score": 10,
+        "status": "New"
+    },
+    {
+        "id": 75,
+        "name": "Cynthia Parrish",
+        "company": "Perez Group",
+        "email": "cynthia.parrish@hoover.org",
+        "source": "Website",
+        "score": 27,
+        "status": "New"
+    },
+    {
+        "id": 76,
+        "name": "Melissa Williams",
+        "company": "Meadows Inc",
+        "email": "melissa.williams@santiago-frye.info",
+        "source": "Referral",
+        "score": 34,
+        "status": "Qualified"
+    },
+    {
+        "id": 77,
+        "name": "William Jimenez",
+        "company": "Ballard-Fernandez",
+        "email": "william.jimenez@alexander-grant.com",
+        "source": "Referral",
+        "score": 70,
+        "status": "Unqualified"
+    },
+    {
+        "id": 78,
+        "name": "Anna Butler",
+        "company": "Parker LLC",
+        "email": "anna.butler@howard-turner.com",
+        "source": "Referral",
+        "score": 82,
+        "status": "Qualified"
+    },
+    {
+        "id": 79,
+        "name": "Lauren Pierce",
+        "company": "Johnson, Mcintyre and Vasquez",
+        "email": "lauren.pierce@martinez-hampton.com",
+        "source": "Website",
+        "score": 34,
+        "status": "Qualified"
+    },
+    {
+        "id": 80,
+        "name": "Rachel Contreras",
+        "company": "Pugh, Hart and Le",
+        "email": "rachel.contreras@tanner.biz",
+        "source": "Cold Email",
+        "score": 92,
+        "status": "Unqualified"
+    },
+    {
+        "id": 81,
+        "name": "Jennifer Norman",
+        "company": "Spears-Garrett",
+        "email": "jennifer.norman@holt.info",
+        "source": "Cold Email",
+        "score": 39,
+        "status": "Unqualified"
+    },
+    {
+        "id": 82,
+        "name": "Heather Kelley",
+        "company": "Norris, Lee and Brown",
+        "email": "heather.kelley@hunt-hernandez.biz",
         "source": "Event",
-        "score": 74,
+        "score": 11,
+        "status": "Contacted"
+    },
+    {
+        "id": 83,
+        "name": "Ana Baird",
+        "company": "Sanchez-Hebert",
+        "email": "ana.baird@martin-morris.biz",
+        "source": "Referral",
+        "score": 33,
+        "status": "Qualified"
+    },
+    {
+        "id": 84,
+        "name": "Melissa Johnson",
+        "company": "Evans-Arellano",
+        "email": "melissa.johnson@nunez.info",
+        "source": "LinkedIn",
+        "score": 69,
+        "status": "Qualified"
+    },
+    {
+        "id": 85,
+        "name": "Christina Briggs",
+        "company": "Castaneda-Brown",
+        "email": "christina.briggs@bowman-lynn.com",
+        "source": "Event",
+        "score": 87,
+        "status": "Qualified"
+    },
+    {
+        "id": 86,
+        "name": "Lisa Martinez",
+        "company": "Harrington-Arellano",
+        "email": "lisa.martinez@butler.com",
+        "source": "Event",
+        "score": 67,
+        "status": "Qualified"
+    },
+    {
+        "id": 87,
+        "name": "Lisa Dunn",
+        "company": "Cardenas-Maldonado",
+        "email": "lisa.dunn@elliott.com",
+        "source": "Cold Email",
+        "score": 90,
+        "status": "Qualified"
+    },
+    {
+        "id": 88,
+        "name": "Christopher Brown",
+        "company": "Swanson-Montoya",
+        "email": "christopher.brown@cruz.net",
+        "source": "LinkedIn",
+        "score": 4,
+        "status": "Qualified"
+    },
+    {
+        "id": 89,
+        "name": "Ryan Castro",
+        "company": "Price-Bridges",
+        "email": "ryan.castro@leonard-pena.org",
+        "source": "Cold Email",
+        "score": 83,
+        "status": "Qualified"
+    },
+    {
+        "id": 90,
+        "name": "John Mason",
+        "company": "Miles, Wood and Wright",
+        "email": "john.mason@smith.com",
+        "source": "Cold Email",
+        "score": 55,
+        "status": "Contacted"
+    },
+    {
+        "id": 91,
+        "name": "Matthew Smith DDS",
+        "company": "Lambert-Lewis",
+        "email": "matthew.dds@mckee-johnson.com",
+        "source": "LinkedIn",
+        "score": 30,
+        "status": "Qualified"
+    },
+    {
+        "id": 92,
+        "name": "Paula Roberson",
+        "company": "Rush-Smith",
+        "email": "paula.roberson@poole.biz",
+        "source": "Website",
+        "score": 2,
+        "status": "Unqualified"
+    },
+    {
+        "id": 93,
+        "name": "Monica Kaiser",
+        "company": "Hill-Lucas",
+        "email": "monica.kaiser@brown-smith.com",
+        "source": "LinkedIn",
+        "score": 26,
+        "status": "Contacted"
+    },
+    {
+        "id": 94,
+        "name": "Mark Robinson",
+        "company": "Stewart, Hansen and Moore",
+        "email": "mark.robinson@vincent.com",
+        "source": "LinkedIn",
+        "score": 87,
+        "status": "Unqualified"
+    },
+    {
+        "id": 95,
+        "name": "Jonathan Martinez",
+        "company": "Larson, Gonzales and Cook",
+        "email": "jonathan.martinez@johnson.com",
+        "source": "Referral",
+        "score": 82,
+        "status": "Unqualified"
+    },
+    {
+        "id": 96,
+        "name": "Amanda Newton",
+        "company": "Martinez Ltd",
+        "email": "amanda.newton@henderson.info",
+        "source": "Website",
+        "score": 7,
+        "status": "Unqualified"
+    },
+    {
+        "id": 97,
+        "name": "Kelly Martinez",
+        "company": "Tate Group",
+        "email": "kelly.martinez@pham.com",
+        "source": "Cold Email",
+        "score": 83,
+        "status": "New"
+    },
+    {
+        "id": 98,
+        "name": "Victor Ross",
+        "company": "Haynes, Morales and Mcpherson",
+        "email": "victor.ross@campbell.com",
+        "source": "LinkedIn",
+        "score": 86,
         "status": "New"
     },
     {
         "id": 99,
-        "name": "Bethany Fitzgerald",
-        "company": "Garcia, Obrien and Webster",
-        "email": "bethany.fitzgerald@garcia,obrienandwebster.com",
-        "source": "Website",
-        "score": 85,
-        "status": "Proposal Sent"
+        "name": "Maria Williams",
+        "company": "Joyce, Jones and Chase",
+        "email": "maria.williams@martin.org",
+        "source": "Cold Email",
+        "score": 4,
+        "status": "Contacted"
     },
     {
         "id": 100,
-        "name": "Veronica Pitts",
-        "company": "Floyd, Flores and Frederick",
-        "email": "veronica.pitts@floyd,floresandfrederick.com",
-        "source": "Referral",
-        "score": 78,
-        "status": "New"
+        "name": "Cynthia Browning",
+        "company": "Porter Ltd",
+        "email": "cynthia.browning@flores.org",
+        "source": "Website",
+        "score": 56,
+        "status": "Contacted"
     }
 ]

@@ -1,69 +1,86 @@
-# React + TypeScript + Vite
+# Mini Seller Console
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A compact, responsive web application designed to display and manage sales leads. This project serves as a demonstration of a modern React frontend stack.
 
-Currently, two official plugins are available:
+![Mini Seller Console Demo](public/mini_seller_console.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Lead Visualization:** View a list of sales leads in a clean, sortable table.
+- **Responsive Design:** The application is fully responsive and works seamlessly on desktop, tablet, and mobile devices.
+- **Search & Filter:**
+  - Dynamically search for leads by name or company.
+  - Filter the lead list by their current status.
+- **Sort by Score:** Sort leads by their score in ascending or descending order.
+- **Lead Details Panel:** Click on any lead to open a side panel with detailed information.
+- **Lead Conversion:** "Convert" a lead into an opportunity through an interactive modal.
+- **Create Opportunities:** A form within the modal allows for the creation of new opportunities associated with a lead.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This project is built with a modern frontend toolchain:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Framework:** [React](https://react.dev/) (`v19`)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) (`v4`)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Linting:** [ESLint](https://eslint.org/)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+You need to have [Node.js](https://nodejs.org/) (version 18 or later is recommended) and [npm](https://www.npmjs.com/) installed on your machine.
+
+### Installation & Setup
+
+1.  **Clone the repository:**
+
+    ```sh
+    git clone https://your-repository-link.com/mini_seller_console.git
+    cd mini_seller_console
+    ```
+
+2.  **Install dependencies:**
+    All the necessary dependencies are listed in the `package.json` file. Install them with:
+    ```sh
+    npm install
+    ```
+
+### Available Scripts
+
+- **To run the development server:**
+  This will start a local server, typically at `http://localhost:5173`, with hot-reloading enabled.
+
+  ```sh
+  npm run dev
+  ```
+
+- **To build the application for production:**
+  This will compile the TypeScript code and bundle the application into a `dist` folder, ready for deployment.
+
+  ```sh
+  npm run build
+  ```
+
+- **To preview the production build:**
+  This command starts a local server to serve the files from the `dist` folder.
+
+  ```sh
+  npm run preview
+  ```
+
+- **To run the linter:**
+  This will analyze the code for potential errors and style issues.
+  ```sh
+  npm run lint
+  ```
